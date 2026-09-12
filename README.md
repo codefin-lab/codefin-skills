@@ -73,6 +73,9 @@ separately from its tools**, so it survives the next language or vendor.
 
 ```
 .claude-plugin/marketplace.json    the marketplace
+.github/workflows/pr.yml           this repository's own gate
+scripts/                           check-no-leaks, check-structure, check-templates
+tests/fixtures/                    minimal projects the templates are run against
 docs/
   adding-a-skill.md                how to add the next skill
 plugins/<skill>/
@@ -84,6 +87,21 @@ plugins/<skill>/
     scripts/                       tools the skill runs
     templates/                     files to copy rather than retype
 ```
+
+## Checks
+
+This repository runs the gate it argues for. Everything CI runs, you can run:
+
+```bash
+./scripts/check-no-leaks.sh     # public repo, internal origins - this one matters most
+./scripts/check-structure.sh    # json parses, skill names match their directories
+./scripts/check-templates.sh    # the unit-test templates are executed, not just read
+```
+
+The leak check works in two layers, because a list of confidential names cannot itself be
+published: structural patterns live in the script, and the names live in a `LEAK_DENYLIST`
+repository secret, or a gitignored `.leakpatterns` file locally. Every rule has been tested by
+planting a fake leak and confirming the gate fails.
 
 ## License
 

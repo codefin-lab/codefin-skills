@@ -43,11 +43,11 @@ assumes one of them excludes most of the company, and dates the moment a stack c
 `codefin-dev` does this with `references/stacks.md`, and checks it:
 
 ```bash
-grep -ril 'gqlgen\|mssql\|cucumber' plugins/<skill>/skills/<skill>/SKILL.md \
-  plugins/<skill>/skills/<skill>/references/{a,b,c}.md
+grep -ril '<a tool your company happens to use>' plugins/<skill>/skills/<skill>/SKILL.md \
+  plugins/<skill>/skills/<skill>/references/*.md
 ```
 
-Nothing should come back.
+Nothing should come back except the one stacks reference.
 
 ### Read the repository, then follow it
 
@@ -59,7 +59,9 @@ anything you write as absolute really is.
 ### Anything runnable is actually run
 
 Templates and scripts ship only after they have been executed against something real, and the
-result goes in the commit message. `codefin-dev`'s Go and Python test templates were run in real
+result goes in the commit message. `./scripts/check-templates.sh` enforces this for unit-test
+templates by copying each one over a fixture in `tests/fixtures/` and running it; add a fixture
+when you add a template, so the rule keeps applying to the new one. `codefin-dev`'s Go and Python test templates were run in real
 modules through the template's own Makefile target; its `blast-radius.sh` was run against the
 live repositories, where it immediately found a vendored copy of a shared helper and a component
 defined three times.

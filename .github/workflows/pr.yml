@@ -1,0 +1,68 @@
+# The gate for this repository.
+#
+# A repository whose subject is "make the tests block" should not merge on trust. The leak check
+# matters most: this repository is public and was written from internal evidence, so the way it
+# fails is by someone pasting a real example into an edit.
+
+name: pr
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: pr-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  leaks:
+    name: no leaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Structural patterns, plus the private denylist when one is configured
+        env:
+          # Optional repository secret: newline-separated names that must never appear here.
+          # The list is confidential, so it lives in the secret rather than in the repository,
+          # and a hit is reported by file and count, never by quoting the matched line.
+          LEAK_DENYLIST: ${{ secrets.LEAK_DENYLIST }}
+        run: ./scripts/check-no-leaks.sh
+
+  structure:
+    name: structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./scripts/check-structure.sh
+
+  templates:
+    name: templates run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with: { go-version: '1.24' }
+      - uses: actions/setup-node@v4
+        with: { node-version: '24' }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.13' }
+      - run: pip install --quiet pytest
+      - run: ./scripts/check-templates.sh
+
+  workflows:
+    name: workflow templates lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: actionlint
+        run: |
+          bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          # The shipped templates carry placeholder run steps, so shellcheck's opinion of them is
+          # noise; the structure is what has to be valid.
+          ./actionlint -shellcheck= \
+            .github/workflows/*.yml \
+            plugins/codefin-dev/skills/codefin-dev/templates/workflow-*.yml
