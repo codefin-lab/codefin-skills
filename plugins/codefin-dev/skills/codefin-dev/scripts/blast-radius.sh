@@ -12,6 +12,7 @@
 #   -o         a GitHub org to search too, repeatable (costs one code-search call each)
 #   -x         restrict remote search by extension, repeatable (e.g. -x go -x sql)
 #   -q         quiet: counts only, no matching lines
+#   -s         substring: match inside words too (default is whole words only)
 #
 # Local search is free and always runs. Remote search needs `gh auth` and is limited to about
 # ten queries a minute, so it runs one query per org rather than one per repository.
@@ -23,7 +24,7 @@ set -uo pipefail
 
 die() { printf 'blast-radius: %s\n' "$1" >&2; exit 2; }
 
-repo=$PWD; local_root=""; quiet=0; orgs=(); exts=(); positional=()
+repo=$PWD; local_root=""; quiet=0; substr=0; orgs=(); exts=(); positional=()
 
 # Parsed by hand rather than with getopts so that options may appear anywhere, including after
 # the symbol - which is how people actually type it.
@@ -34,6 +35,7 @@ while [ $# -gt 0 ]; do
     -o) [ $# -ge 2 ] || die "-o needs a value"; orgs+=("$2"); shift 2 ;;
     -x) [ $# -ge 2 ] || die "-x needs a value"; exts+=("$2"); shift 2 ;;
     -q) quiet=1; shift ;;
+    -s) substr=1; shift ;;
     -h|--help) sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     --) shift; while [ $# -gt 0 ]; do positional+=("$1"); shift; done ;;
     -*) die "unknown option $1" ;;
@@ -48,6 +50,11 @@ symbol=$1
 repo=$(cd "$repo" && pwd)
 [ -n "$local_root" ] || local_root=$(dirname "$repo")
 
+# Whole words unless -s. A short symbol like `abs` matched as a substring hits every
+# "absolute" and "absent" in the repository, and a tool that returns mostly noise is a tool
+# people stop running - which is the failure this script exists to prevent.
+if [ "$substr" -eq 1 ]; then W=(); else W=(-w); fi
+
 hits_here=0
 declare -a siblings_hit=()
 
@@ -56,12 +63,13 @@ printf '\n=== blast radius: %s ===\n' "$symbol"
 # --- the repository you are changing -----------------------------------------------------
 printf '\n-- this repository (%s) --\n' "$(basename "$repo")"
 if git -C "$repo" rev-parse --git-dir >/dev/null 2>&1; then
-  hits_here=$(git -C "$repo" grep -InF -- "$symbol" 2>/dev/null | wc -l | tr -d ' ')
+  hits_here=$(git -C "$repo" grep -InF ${W[@]+"${W[@]}"} -- "$symbol" 2>/dev/null | wc -l | tr -d ' ')
   if [ "$hits_here" -eq 0 ]; then
-    printf '   no match. Check the spelling, or the symbol is only reached indirectly.\n'
+    printf '   no match. Check the spelling, or the symbol is only reached indirectly.
+   If it is part of a longer name, try -s to match inside words.\n'
   else
     printf '   %s matching lines\n' "$hits_here"
-    [ "$quiet" -eq 1 ] || git -C "$repo" grep -InF -- "$symbol" 2>/dev/null | head -40 | sed 's/^/   /'
+    [ "$quiet" -eq 1 ] || git -C "$repo" grep -InF ${W[@]+"${W[@]}"} -- "$symbol" 2>/dev/null | head -40 | sed 's/^/   /'
     [ "$quiet" -eq 1 ] || [ "$hits_here" -le 40 ] || printf '   ... %s more\n' "$((hits_here - 40))"
   fi
 else
@@ -74,12 +82,12 @@ found_sibling=0
 while IFS= read -r gitdir; do
   sib=$(dirname "$gitdir")
   [ "$sib" = "$repo" ] && continue
-  n=$(git -C "$sib" grep -IlF -- "$symbol" 2>/dev/null | wc -l | tr -d ' ')
+  n=$(git -C "$sib" grep -IlF ${W[@]+"${W[@]}"} -- "$symbol" 2>/dev/null | wc -l | tr -d ' ')
   [ "$n" -eq 0 ] && continue
   found_sibling=1
   siblings_hit+=("$sib")
   printf '   %-34s %s files\n' "$(basename "$sib")" "$n"
-  [ "$quiet" -eq 1 ] || git -C "$sib" grep -IlF -- "$symbol" 2>/dev/null | head -6 | sed 's|^|      |'
+  [ "$quiet" -eq 1 ] || git -C "$sib" grep -IlF ${W[@]+"${W[@]}"} -- "$symbol" 2>/dev/null | head -6 | sed 's|^|      |'
 done < <(find "$local_root" -maxdepth 2 -name .git 2>/dev/null)
 [ "$found_sibling" -eq 1 ] || printf '   nothing\n'
 

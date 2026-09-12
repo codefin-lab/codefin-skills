@@ -17,7 +17,14 @@ bash <skill>/scripts/check-requirements.sh <path to the document>
 
 It finds requirements with no acceptance criteria, criteria carrying words that hide a decision,
 requirements with no objective link, duplicate identifiers, and objectives cited but never
-defined. Report what it found plainly, then fix what can be fixed without the customer.
+defined. Report what it found plainly.
+
+**Check the copy the customer holds, and amend the source it was built from.** Point the script
+at the issued `.docx` or PDF, because a fix made in a draft after the PDF went out has reached
+nobody. But do not edit that copy: amend the markdown it was built from and re-issue, or - where
+the document itself is the source - write out exactly what should change and let it be made
+where the document lives. Two copies that disagree, both looking current, is worse than the
+original finding.
 
 **It clears noise; it does not do the analysis.** What it cannot see is the whole of the next
 part.

@@ -132,10 +132,15 @@ for doc in "$@"; do
   missing_ac=""; missing_obj=""
   while IFS= read -r id; do
     [ -z "$id" ] && continue
+    # The block belongs to this requirement alone: start at its identifier and stop at the
+    # next one. A fixed line window instead bleeds into the following requirement and borrows
+    # its criteria, which silently passes the requirement that has none - the exact failure
+    # this check exists to catch.
     block=$(awk -v id="$id" '
-      index($0, id) { hit=1 }
+      !hit && index($0, id) { hit = 1; print; next }
+      hit && /(US-[0-9]+\.[0-9]+|BR-[0-9]+)/ { exit }
       hit { print; n++ }
-      n > 12 { exit }' "$txt")
+      n > 30 { exit }' "$txt")
     # Look for a criterion, not merely for words that also occur in requirement prose:
     # an explicit Acceptance/AC line, or a Given...then construction on one line.
     printf '%s' "$block" \

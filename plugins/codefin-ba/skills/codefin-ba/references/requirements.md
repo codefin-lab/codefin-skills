@@ -63,3 +63,18 @@ to check - a fix made in the draft after the PDF was issued has not reached anyb
 `scripts/check-requirements.sh` reads all of those formats for exactly that reason. When it
 cannot read a file it says so and fails, rather than reporting nothing found, because those two
 outcomes look identical in a report and mean opposite things.
+
+**Reading and amending are not the same file.** You read whichever copy is authoritative,
+including a `.docx` or a PDF. You amend **the source it was built from**, and then re-issue -
+never by editing the binary, and never by quietly editing a draft that is not what went out.
+
+- If the document is built from markdown, amend the markdown and rebuild through whichever skill
+  owns the document house style.
+- If the `.docx` itself is the source, the amendment is a document edit, not an agent edit. Say
+  what needs to change, in the words that should appear, and let it be made where the document
+  lives.
+- Either way the version and change-control entries move too, or the next reader cannot tell
+  which copy they are holding.
+
+An agent that edits a draft while the issued PDF stays wrong has made the problem worse: now two
+copies disagree and both look current.
