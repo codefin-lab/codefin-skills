@@ -64,5 +64,10 @@ Coverage is not the number of cases. It is:
 `scripts/trace-gaps.sh` computes the first and third from the register and the suite. The second
 is yours to keep accurate during the round.
 
+It reads the register as a spreadsheet, `.docx`, PDF, csv or markdown, so it works against
+whichever copy is current rather than requiring the register to be converted first. A file it
+cannot read is an error rather than an empty result - "no scenarios found" and "could not open
+it" look the same in a report and mean opposite things.
+
 A coverage report that counts cases without reference to requirements measures effort, not
 coverage, and it will be quoted at you later.

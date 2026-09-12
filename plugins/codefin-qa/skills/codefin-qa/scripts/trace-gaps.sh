@@ -3,7 +3,7 @@
 #
 #   trace-gaps.sh --register <file> [--requirements <file>] [--suite <dir>]
 #
-#   --register      the test register: .xlsx, .csv or .md holding TS-<n> and the US it proves
+#   --register      the test register holding TS-<n> and the US it proves
 #   --requirements  the BRD, to find requirements with no scenario at all
 #   --suite         the automation directory, to find scenarios never automated
 #
@@ -14,8 +14,13 @@
 #   3. scenarios never automated              fine if deliberate, a gap if forgotten
 #   4. automation citing no scenario          a test the register does not know about
 #
-# It reads the register rather than asking you to keep a second copy of the truth. Reading .xlsx
-# needs openpyxl (pip install openpyxl); .csv and .md need nothing.
+# Both documents may be .md, .txt, .csv, .docx, .pdf or .xlsx - a register and a BRD are as
+# likely to arrive in the format that was sent as in the one they were drafted in. A file it
+# cannot read is an error, never an empty result: "no scenarios found" and "could not open it"
+# look the same in a report and mean opposite things.
+#
+# .docx needs nothing. .pdf needs pdftotext (brew install poppler) or pypdf. .xlsx needs
+# openpyxl.
 
 set -uo pipefail
 
@@ -33,32 +38,72 @@ done
 [ -f "$register" ] || { echo "no such register: $register" >&2; exit 2; }
 
 python3 - "$register" "$requirements" "$suite" <<'PY'
-import os, re, sys, csv
+import os, re, sys
 
 register, requirements, suite = sys.argv[1], sys.argv[2], sys.argv[3]
 TS = re.compile(r'\bTS-\d+\b')
 US = re.compile(r'\bUS-\d+\.\d+\b')
 
-def cells(path):
-    """Every cell of the register as text, row by row, whatever the format."""
+def extract(path):
+    """Return the document's text, or raise RuntimeError saying why it could not be read."""
+    import os, re, subprocess, zipfile
     ext = os.path.splitext(path)[1].lower()
+
+    if ext in ('.md', '.txt', '.csv', '.tsv', '.markdown', '.rst', ''):
+        return open(path, encoding='utf-8', errors='replace').read()
+
     if ext in ('.xlsx', '.xlsm'):
         try:
             from openpyxl import load_workbook
         except ImportError:
-            sys.exit("reading .xlsx needs openpyxl:  pip install openpyxl")
+            raise RuntimeError("reading .xlsx needs openpyxl:  pip install openpyxl")
         wb = load_workbook(path, read_only=True, data_only=True)
+        rows = []
         for ws in wb.worksheets:
             for row in ws.iter_rows(values_only=True):
-                yield " ".join(str(c) for c in row if c is not None)
-    elif ext == '.csv':
-        with open(path, newline='', encoding='utf-8-sig') as fh:
-            for row in csv.reader(fh):
-                yield " ".join(row)
-    else:
-        with open(path, encoding='utf-8') as fh:
-            for line in fh:
-                yield line
+                rows.append(" ".join(str(c) for c in row if c is not None))
+        return "\n".join(rows)
+
+    if ext == '.docx':
+        # A .docx is a zip; no third-party package needed. Paragraph and row ends become
+        # newlines so that line-oriented checks still mean something.
+        with zipfile.ZipFile(path) as z:
+            names = [n for n in ('word/document.xml',) if n in z.namelist()]
+            if not names:
+                raise RuntimeError(".docx has no word/document.xml - is it really a .docx?")
+            xml = z.read(names[0]).decode('utf-8', errors='replace')
+        xml = re.sub(r'</w:(p|tr)>', '\n', xml)
+        xml = re.sub(r'<w:tab[^>]*/>', '\t', xml)
+        return re.sub(r'<[^>]+>', '', xml)
+
+    if ext == '.pdf':
+        if subprocess.run(['which', 'pdftotext'], capture_output=True).returncode == 0:
+            out = subprocess.run(['pdftotext', '-layout', path, '-'],
+                                 capture_output=True, text=True)
+            if out.returncode == 0:
+                return out.stdout
+            raise RuntimeError(f"pdftotext failed: {out.stderr.strip()[:120]}")
+        try:
+            from pypdf import PdfReader
+        except ImportError:
+            raise RuntimeError("reading .pdf needs pdftotext (brew install poppler) "
+                               "or pypdf (pip install pypdf)")
+        return "\n".join((p.extract_text() or "") for p in PdfReader(path).pages)
+
+    raise RuntimeError(f"do not know how to read {ext or 'a file with no extension'}")
+
+
+def cells(path):
+    """The document as lines, whatever the format."""
+    return extract(path).splitlines()
+
+for label, path in (("register", register), ("requirements", requirements)):
+    if path and os.path.exists(path):
+        try:
+            extract(path)
+        except RuntimeError as e:
+            sys.exit(f"cannot read the {label} ({os.path.basename(path)}): {e}\n"
+                     f"This is not an empty result - the file was never examined.")
 
 # --- the register: scenario -> requirements it cites -------------------------------------
 scenarios = {}
@@ -91,9 +136,8 @@ report("scenarios citing no requirement",
 # 1. requirements with no scenario
 if requirements and os.path.exists(requirements):
     want = set()
-    with open(requirements, encoding='utf-8') as fh:
-        for line in fh:
-            want.update(US.findall(line))
+    for line in cells(requirements):
+        want.update(US.findall(line))
     covered = set().union(*scenarios.values()) if scenarios else set()
     print(f"\nrequirements: {len(want)} referenced in {os.path.basename(requirements)}")
     report("requirements with no scenario", want - covered,

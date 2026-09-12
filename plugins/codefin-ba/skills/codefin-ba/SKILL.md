@@ -63,7 +63,9 @@ reports the first of them.
 | deciding what to model, and how | `references/modelling.md` |
 
 `templates/` holds forms to fill rather than retype. `scripts/check-requirements.sh` reads a
-requirements document and reports what is missing before a reviewer has to find it.
+requirements document - markdown, `.docx`, PDF, spreadsheet, whichever form it reached you in -
+and reports what is missing before a reviewer has to find it. Point it at the copy the customer
+actually holds, not only at the draft.
 
 ## Handing over
 

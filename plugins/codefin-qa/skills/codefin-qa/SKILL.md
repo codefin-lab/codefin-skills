@@ -27,7 +27,8 @@ US-<epic>.<n>   the requirement and its acceptance criteria, from the BRD
 
 A requirement with no scenario has nobody proving it. A scenario citing no requirement is
 testing something nobody asked for. `scripts/trace-gaps.sh` finds both, plus scenarios written
-but never automated.
+but never automated. It reads the register and the requirements in whatever form they arrived -
+spreadsheet, `.docx`, PDF, markdown - since neither is always the format it was drafted in.
 
 ## What does not bend
 

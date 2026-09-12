@@ -53,3 +53,13 @@ listed ones, languages, environments, support after go-live.
 Where a requirement came from - which question, which answer, which meeting - is worth a
 reference. When somebody challenges it eighteen months later, that reference ends the discussion
 in a minute instead of a week.
+
+## Check the copy that counts
+
+A BRD usually exists in more than one form: a draft in markdown, a `.docx` in review, a PDF that
+went to the customer. **The one the customer holds is the one that matters**, and it is the one
+to check - a fix made in the draft after the PDF was issued has not reached anybody.
+
+`scripts/check-requirements.sh` reads all of those formats for exactly that reason. When it
+cannot read a file it says so and fails, rather than reporting nothing found, because those two
+outcomes look identical in a report and mean opposite things.
