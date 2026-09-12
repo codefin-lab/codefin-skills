@@ -93,15 +93,27 @@ plugins/<skill>/
 This repository runs the gate it argues for. Everything CI runs, you can run:
 
 ```bash
-./scripts/check-no-leaks.sh     # public repo, internal origins - this one matters most
-./scripts/check-structure.sh    # json parses, skill names match their directories
-./scripts/check-templates.sh    # the unit-test templates are executed, not just read
+./scripts/check-no-leaks.sh              # public repo, internal origins - this matters most
+./scripts/check-no-leaks.sh --history    # every blob on every ref, not just the working tree
+./scripts/check-structure.sh             # json parses, skill names match their directories
+./scripts/check-templates.sh             # the unit-test templates are executed, not just read
+./scripts/install-hooks.sh               # optional: run the history check before every push
 ```
 
 The leak check works in two layers, because a list of confidential names cannot itself be
-published: structural patterns live in the script, and the names live in a `LEAK_DENYLIST`
-repository secret, or a gitignored `.leakpatterns` file locally. Every rule has been tested by
-planting a fake leak and confirming the gate fails.
+published: structural patterns live in the script, and the names come from a `LEAK_DENYLIST`
+repository secret, or a gitignored `.leakpatterns` file locally. A denylist hit is reported by
+file, never by quoting the line. Every rule is tested by planting a fake leak and confirming the
+gate fails, with a control that ordinary prose does not trip it.
+
+`--history` exists because **deleting a leaked file does not unpublish it** — the blob stays
+readable to anyone who clones. It is the check worth running before a push, which is what
+`install-hooks.sh` wires up.
+
+**There is no sanitiser, on purpose.** What leaks is rarely a name a script could substitute; it
+is a sentence describing something internal, and only a person reading it will catch that. A
+tool that rewrote text automatically would hide that work rather than do it. These scripts
+verify and refuse; the judgement stays with the author.
 
 ## License
 

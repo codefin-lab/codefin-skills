@@ -26,6 +26,9 @@ the delivered documents, the pipelines. Where practice is inconsistent, note it 
 quietly picking a winner — the inconsistency is usually the most useful thing you found, and
 choosing between them is the owner's call, not the author's.
 
+Run `./scripts/check-no-leaks.sh --history` before pushing, and read the findings yourself
+rather than looking for a tool that strips them: the checks catch shapes, not meaning.
+
 **Keep the survey itself internal, and publish only what it taught.** The findings that make a
 skill good — which repositories are weak, which client systems lack a gate — are exactly the
 findings that must not ship. Write the guidance as a general standard that stands on its own,

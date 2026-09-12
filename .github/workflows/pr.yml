@@ -24,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Structural patterns, plus the private denylist when one is configured
         env:
           # Optional repository secret: newline-separated names that must never appear here.
@@ -31,6 +33,13 @@ jobs:
           # and a hit is reported by file and count, never by quoting the matched line.
           LEAK_DENYLIST: ${{ secrets.LEAK_DENYLIST }}
         run: ./scripts/check-no-leaks.sh
+
+      # Deleting a leaked file does not unpublish it. The blob stays readable to anyone who
+      # clones, so history is scanned too - and fetched in full for that to mean anything.
+      - name: History as well
+        env:
+          LEAK_DENYLIST: ${{ secrets.LEAK_DENYLIST }}
+        run: ./scripts/check-no-leaks.sh --history
 
   structure:
     name: structure
