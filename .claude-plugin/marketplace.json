@@ -12,6 +12,11 @@
       "name": "codefin-dev",
       "source": "./plugins/codefin-dev",
       "description": "How Codefin builds software: the three test layers run as gates without being asked, the defect procedure that keeps a fix closed, and the handoffs that keep PO, QA and Dev on one document."
+    },
+    {
+      "name": "codefin-ba",
+      "source": "./plugins/codefin-ba",
+      "description": "Business analysis: turning what a customer says into requirements that can be built and acceptance criteria that can be proved, sized honestly, with the scope line held."
     }
   ]
 }
