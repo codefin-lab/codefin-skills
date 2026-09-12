@@ -27,10 +27,18 @@ restate them here; run them.
 Then look for what setup specifically cares about:
 
 ```bash
-ls /path/to/repo/{CLAUDE.md,AGENTS.md,CONTEXT.md,ARCHITECTURE.md,.env.example} 2>/dev/null
+ls /path/to/repo/{CLAUDE.md,AGENTS.md,CONTEXT.md,ARCHITECTURE.md,.env.example,.gitignore} 2>/dev/null
 ls -d /path/to/repo/docs/adr 2>/dev/null
 ls /path/to/repo/.github/workflows 2>/dev/null
+
+# Anything secret already committed. Check before you add a gate, not after.
+git -C /path/to/repo ls-files | grep -iE '(^|/)\.env$|\.pem$|\.p12$|credentials|secrets?\.(ya?ml|json)$'
 ```
+
+**A tracked `.env` or key file is the first thing to report, ahead of anything missing.** It is
+already in the history, so removing the file does not remove the secret: say so, say the
+credential has to be rotated, and leave rewriting history to the user. Do not quietly delete it
+and move on.
 
 ## 2. Present what you found
 
@@ -82,8 +90,13 @@ wrong, say so and leave it.
 | `CONTEXT.md` | a stub with the domain's vocabulary | the words the team and the customer use |
 | `docs/adr/0001-*.md` | `codefin-dev` `templates/adr-template.md` | records that this project adopted these standards, and why |
 | `.env.example` | the variables the code reads | every one, with safe examples and no secrets |
-| the four test targets | `codefin-dev` `templates/makefile-test.mk` | `test`, `test-integration`, `test-e2e`, `test-all` |
+| `.gitignore` | the language's build output, plus `coverage.*` | the test targets below write coverage files on their first run |
+| the test and build targets | `codefin-dev` `templates/makefile-test.mk` | `lint`, `build`, `test`, `test-integration`, `test-e2e`, `test-all` |
 | the pull request gate | `codefin-dev` `templates/workflow-pr.yml` | far easier now than after the repository has grown without one |
+
+Install the Makefile block and the workflow **together**: the workflow calls `lint`, `test` and
+`build`, and a gate that fails on its first run for a missing target teaches the team to ignore
+it.
 
 Put the answers from section 3 in `CLAUDE.md` as plain prose under a heading - where the
 agreement lives, the environments and how to reach them, where work is tracked. **Not a separate
@@ -98,5 +111,18 @@ leave.
 Say what was created, what was skipped and why, and what still has no answer. Anything left open
 is a question for later, not a gap to fill with a plausible guess.
 
-Then run `make test` once. A repository that has just been given a test gate should be watched
-going green at least once, or the gate is a claim rather than a fact.
+Then run `lint`, `build` and `test` once. A repository that has just been given a gate should be
+watched going green, or the gate is a claim rather than a fact.
+
+**A green `make test` on a repository with no tests proves nothing.** It exits zero because there
+was nothing to run, which is the same empty-suite problem these skills warn about elsewhere -
+except this time we installed it. So before calling setup done, either:
+
+- **write one real test** against something the code already does, from
+  `codefin-dev` `templates/unit-test.*`, and watch it pass and then fail when you break the code
+  under it; or
+- **say plainly that the gate is currently vacuous**, with the count of test files, so nobody
+  reads the green tick as evidence.
+
+The first is better and usually takes ten minutes. A gate whose first green run is honest is the
+difference between a habit and a decoration.

@@ -7,10 +7,20 @@
 #   include makefile-test.mk
 #
 # ENV selects the environment for the layers that need real things running.
+#
+# The pull request workflow in workflow-pr.yml calls lint, test and build, so all three live
+# here. Install the two together or the gate fails on its first run for reasons that have
+# nothing to do with the change.
 
 ENV ?= local
 
-.PHONY: test test-integration test-e2e test-all
+.PHONY: lint build test test-integration test-e2e test-all
+
+lint: ## Format check and static analysis. Fast, run before committing.
+	gofmt -l . && go vet ./...
+
+build: ## Produce the artifact, so a break shows up before the tests do.
+	go build ./...
 
 test: ## Unit tests. Fast, offline, no real dependencies.
 	go test -race -coverprofile=coverage.txt -covermode=atomic ./...

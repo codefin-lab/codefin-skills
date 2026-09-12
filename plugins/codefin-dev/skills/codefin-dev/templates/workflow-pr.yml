@@ -35,9 +35,18 @@ jobs:
       - name: Build
         run: make build
 
-      # Where this repository publishes something others consume - a schema, an API description,
-      # a library's public surface - check it still fits. This is the gate that catches the
-      # breakage unit tests are blind to.
+      # Where this repository publishes something others consume - a schema, an API
+      # description, a library's public surface - check it still fits. This is the gate that
+      # catches the breakage unit tests are blind to.
+      #
+      # Skipped, loudly, where the repository defines no such target: a repository with nothing
+      # to publish should not fail here, and one that does publish should not pass silently.
       - name: Contract check
-        run: make contract-check
-        continue-on-error: false
+        run: |
+          if make -n contract-check >/dev/null 2>&1; then
+            make contract-check
+          else
+            echo "No contract-check target. If this repository publishes a schema, an API"
+            echo "description or a library's public surface, add one - unit tests cannot see"
+            echo "that class of break."
+          fi
