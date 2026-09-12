@@ -16,7 +16,8 @@ is always to write one record in one shape:
 - what they saw
 - what they expected to see
 - the environment and the version or build it happened on
-- **which `US-<epic>.<n>` it violates**, quoted from the BRD or FSD
+- **which `US-<epic>.<n>` it violates**, quoted from the BRD, and the `TS-<n>` that should have
+  caught it, if one exists
 
 `templates/defect-record.md` is the form. **No record, no fix.** If a field cannot be filled,
 that is the first thing to go and ask about, and it is cheaper to ask now than after a wrong fix
@@ -155,7 +156,7 @@ The closing note says:
 - which test now guards it, by name
 - where it was verified
 
-Written this way, the note is something the PO can send to the customer unedited, which is
+Written this way, the note is something the BA can send to the customer unedited, which is
 itself part of rebuilding confidence.
 
 ## 12. If it is reopened, record which step was skipped

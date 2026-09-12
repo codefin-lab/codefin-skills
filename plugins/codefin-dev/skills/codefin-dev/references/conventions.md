@@ -25,6 +25,10 @@ fix: a clause that matches nothing can be seeked, so explaining a query does not
 refactor(batchload)!: drop bufferDepth - the knob measured no gain
 ```
 
+Identifiers in examples throughout this skill are deliberately fictional - `ABC-123` for a
+ticket, `TS-900` for a test scenario, `DEF-118` for a defect. Never paste a real one from a
+client project into shared material.
+
 The body carries the ticket key and the reasoning. Attribution trailers are per repository -
 check the log (`references/detect.md`).
 

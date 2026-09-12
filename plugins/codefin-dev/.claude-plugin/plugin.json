@@ -1,7 +1,7 @@
 {
   "name": "codefin-dev",
-  "version": "0.2.0",
-  "description": "Codefin house style for building software: testing as a gate, defect investigation that holds, project knowledge, and the PO/QA/Dev handoffs. Language and stack neutral.",
+  "version": "0.3.0",
+  "description": "Codefin house style for building software: testing as a gate, defect investigation that holds, project knowledge, and the BA/QA/Dev handoffs. Language and stack neutral.",
   "author": {
     "name": "Codefin Company Limited",
     "url": "https://github.com/codefin-lab"

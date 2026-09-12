@@ -51,16 +51,25 @@ to ignore it. Push each case down to the cheapest layer that can still fail hone
 
 Every test case carries the identifier it came from:
 
-- a case derived from the agreement starts with its `US-<epic>.<n>`
+Name each case for whichever identifier it actually descends from, and cite the requirement:
+
+- a case QA derived from a scenario starts with that `TS-<n>` and names the `US-<epic>.<n>` it
+  proves
+- a case a developer wrote straight from an acceptance criterion starts with the `US` - no
+  scenario invented for the sake of the format
 - a regression test starts with the defect it came from and names the `US` that was violated
 
 ```
-US-3.4 a portfolio with no holdings returns an empty list, not an error
+TS-900 (US-3.4) a portfolio with no holdings shows the empty state, not an error
+US-3.4 holdings are totalled across currencies at the given rate
 DEF-118 (US-3.4) a holding with a null valuation date no longer aborts the page
 ```
 
+The first is QA's, the second is a developer's unit test of the same requirement, and the third
+came from a customer. All three name the promise they are about.
+
 This is what makes the chain in `SKILL.md` real rather than aspirational. When a run goes red,
-the failure names the clause of the agreement that is now untrue, and anyone - PO included -
+the failure names the clause of the agreement that is now untrue, and anyone - the BA included -
 can read it.
 
 It also means coverage can be discussed in the language of the agreement: which acceptance

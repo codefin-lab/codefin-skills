@@ -16,6 +16,7 @@
 **Observed**:
 **Expected**:
 **Violates**: `US-<epic>.<n>` - <quote the acceptance criterion>
+**Scenario that should have caught it**: `TS-<n>`, or none yet
 
 > No record, no fix. If a field above cannot be filled, ask before starting.
 
@@ -23,7 +24,7 @@
 
 - [ ] **Defect** - the code contradicts the document
 - [ ] **CR** - the document is wrong, silent, or never covered this case. Stop here; amend the
-      BRD or FSD first.
+      BRD first.
 
 ## Reproduction
 
@@ -75,7 +76,7 @@ Environment, by whom, when.
 
 ## Closing note
 
-*Written so the PO can send it to the customer unedited.*
+*Written so the BA can send it to the customer unedited.*
 
 The cause was <...>. We changed <...>. We also checked <...>. <Test name> now guards this, and it
 was verified on <environment> on <date>.

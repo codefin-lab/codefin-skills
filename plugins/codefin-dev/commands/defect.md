@@ -27,7 +27,7 @@ Do not begin investigating until the record exists.
 
 1. **Defect or CR.** The code contradicting the document is a defect; the document being wrong,
    silent or absent is a change request. State which, in the record, with the reason. A CR stops
-   here - say so, and amend the BRD or FSD first, through whichever skill owns the document
+   here - say so, and amend the BRD first, through whichever skill owns the document
    house style.
 2. **Reproduce**, as a failing test, on the environment in the record. If it will not reproduce,
    go back and ask rather than guessing.
@@ -63,7 +63,7 @@ Do not begin investigating until the record exists.
    without a run; if a layer could not run, say which and what stopped it.
 9. **Verify on the environment the customer reported**, not just locally.
 10. **Close with evidence** in the record: the cause, what changed, what else was affected, the
-    test that now guards it, where it was verified. Write the closing note so the PO can send it
+    test that now guards it, where it was verified. Write the closing note so the BA can send it
     to the customer unedited.
 
 ## While you work

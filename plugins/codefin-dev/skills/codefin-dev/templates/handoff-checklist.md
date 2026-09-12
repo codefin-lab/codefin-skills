@@ -3,7 +3,7 @@
 Three short lists. Each should be readable in under a minute - if one grows past that, it has
 stopped being a handoff and become a process.
 
-## PO to Dev and QA - ready to start
+## BA to Dev and QA - ready to start
 
 - [ ] requirement identifier `US-<epic>.<n>` and its acceptance criteria
 - [ ] **every criterion is testable** - no "quickly", "properly", "gracefully", "as appropriate"
@@ -21,8 +21,8 @@ An untestable criterion comes back now, not at QA.
 - [ ] what else it affects, from the blast radius check
 - [ ] what is knowingly not covered yet
 
-## QA to PO - ready to deliver
+## QA to BA - ready to deliver
 
 - [ ] every acceptance criterion has a result against it
 - [ ] open defects listed with severity
-- [ ] tests added to the permanent suite, by name
+- [ ] tests added to the permanent suite, by name, each citing its `TS-<n>` or `US-<epic>.<n>`

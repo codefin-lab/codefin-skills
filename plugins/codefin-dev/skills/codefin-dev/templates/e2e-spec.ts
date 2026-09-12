@@ -24,8 +24,8 @@ class PortfolioPage {
   }
 }
 
-test.describe("US-3.4 Portfolio summary", () => {
-  test("US-3.4 an account with no holdings shows the empty state, not an error", async ({ page }) => {
+test.describe("TS-900 Portfolio summary (US-3.4)", () => {
+  test("TS-900 an account with no holdings shows the empty state, not an error", async ({ page }) => {
     const portfolio = new PortfolioPage(page);
 
     await portfolio.open("acct-empty");
@@ -34,7 +34,7 @@ test.describe("US-3.4 Portfolio summary", () => {
     await expect(page.getByRole("alert")).toHaveCount(0);
   });
 
-  test("US-3.4 the total reflects every holding on the account", async ({ page }) => {
+  test("TS-900 the total reflects every holding on the account", async ({ page }) => {
     const portfolio = new PortfolioPage(page);
 
     await portfolio.open("acct-1");

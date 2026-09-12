@@ -1,6 +1,6 @@
 ---
 name: codefin-dev
-description: "How Codefin builds software. Use when writing, reviewing, testing, scaffolding or releasing code in any Codefin or client repository, when investigating or fixing a defect, when deciding commit messages, branch names, repository layout or review gates, and when working out what belongs to PO, QA or Dev."
+description: "How Codefin builds software. Use when writing, reviewing, testing, scaffolding or releasing code in any Codefin or client repository, when investigating or fixing a defect, when deciding commit messages, branch names, repository layout or review gates, and when working out what belongs to the BA, QA or Dev."
 ---
 
 # Building software at Codefin
@@ -18,21 +18,27 @@ owns that repository decides. `references/detect.md` is the procedure; run it on
 
 ## One document, one identifier, all the way down
 
-The BRD or FSD is what Codefin and the customer agreed to. It is the only artifact PO, QA and
-Dev all hold, so everything else hangs off it and carries its identifier.
+The BRD is what Codefin and the customer agreed to - some clients call the same document an
+FSD, and the name changes nothing. It is the only artifact the BA, QA and Dev all hold, so
+everything else hangs off it and carries its identifier.
 
 ```
-BRD / FSD    US-3.4 and its Acceptance Criteria      the agreement
-  ├─ test cases at every layer   named for US-3.4, written from the same AC
-  ├─ branch and commits          carry the ticket key
-  └─ a defect                    cites the US it violates, rather than retelling the story
-      └─ its regression test     named for the defect, pointing back at the same US
+BRD          US-3.4 and its Acceptance Criteria    the agreement, written by the BA
+  └─ TS-900  the scenario QA derives to prove it
+      ├─ test cases at every layer   named for TS-900, traceable back to US-3.4
+      ├─ branch and commits          carry the ticket key
+      └─ a defect                    cites the US it violates, rather than retelling the story
+          └─ its regression test     named for the defect, pointing back at the same US
 ```
+
+Two identifiers, not one: the BA numbers what was agreed, QA numbers how it gets proved, and
+each carries the other. A test that names only its own scenario cannot be traced to a promise;
+a requirement with no scenario has nobody proving it.
 
 Two rules make this hold.
 
 **Change the document before the code.** Scope moved, the spec was wrong, a new case appeared:
-edit the BRD or FSD first, then write code to match. A document updated afterwards is a document
+edit the BRD first, then write code to match. A document updated afterwards is a document
 never updated. Make that edit through whichever skill owns your document house style.
 
 **A defect is a defect only when the code contradicts the document.** If the document is wrong,
@@ -76,7 +82,7 @@ argument starts. It is the existing Codefin rule: anything not written in the sc
 | wiring tests into CI so they actually block | `references/gates.md` |
 | starting in an unfamiliar repository | `references/detect.md` |
 | deciding where a piece of project knowledge should live | `references/knowledge.md` |
-| handing work to or from PO or QA, or planning a release | `references/workflow.md` |
+| handing work to or from the BA or QA, or planning a release | `references/workflow.md` |
 | opening a greenfield project, or a repository is silent on a point | `references/conventions.md` |
 | needing the tools for a specific language | `references/stacks.md` |
 
