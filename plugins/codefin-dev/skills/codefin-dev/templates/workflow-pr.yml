@@ -1,0 +1,43 @@
+# Codefin pull request gate.
+#
+# Language neutral: it calls the four standard targets, so the same commands a developer runs
+# are the ones CI runs. Adjust the toolchain setup step for the project; do not adjust the
+# commands, or local and CI will drift.
+
+name: pr
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: pr-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Replace with this project's toolchain: actions/setup-go, setup-node, setup-python, ...
+      - name: Set up toolchain
+        run: echo "set up the toolchain for this project"
+
+      - name: Format and lint
+        run: make lint
+
+      - name: Unit tests
+        run: make test
+
+      - name: Build
+        run: make build
+
+      # Where this repository publishes something others consume - a schema, an API description,
+      # a library's public surface - check it still fits. This is the gate that catches the
+      # breakage unit tests are blind to.
+      - name: Contract check
+        run: make contract-check
+        continue-on-error: false

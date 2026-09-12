@@ -1,0 +1,43 @@
+# Integration tests against what was just deployed.
+#
+# Attach this to the deploy pipeline so the suite runs on its own, against the environment that
+# just changed, instead of someone remembering to run it later.
+
+name: integration
+
+on:
+  workflow_run:
+    workflows: [deploy-staging]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      env:
+        description: Environment to test
+        required: true
+        default: sit
+
+jobs:
+  integration:
+    # Use the runners this project already has.
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    env:
+      ENV: ${{ inputs.env || 'sit' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up toolchain
+        run: echo "set up the toolchain for this project"
+
+      - name: Integration tests
+        run: make test-integration ENV=$ENV
+
+      - name: Publish results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-results-${{ env.ENV }}
+          path: |
+            test-results/
+            reports/
+          if-no-files-found: ignore
