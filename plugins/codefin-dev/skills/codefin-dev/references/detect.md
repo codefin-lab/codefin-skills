@@ -95,6 +95,24 @@ Find where a sibling of the thing you are adding already lives, and put yours be
 reason from the boilerplate the project was generated from: repositories drift from their
 template, and in Codefin some already have. The sibling in *this* repository decides.
 
+## When the repository cannot tell you
+
+Three things are not in the files, because they live outside them. Do not guess at these, and do
+not open a session by asking all of them either - **ask at the moment the work needs one**, and
+write the answer into `CLAUDE.md` so nobody asks again.
+
+| Not in the repository | Ask when | Needed for |
+| :-- | :-- | :-- |
+| where the BRD or FSD actually lives, and which version is current | before judging a customer report, or checking requirements | deciding defect against change request at all |
+| which environments exist, how a change reaches each, how you see it worked | before closing a defect, or pointing an integration run | "verify where the customer was" being an instruction rather than a slogan |
+| which board work is tracked on | only if the log shows no ticket key | branch and commit references |
+
+A question asked when it matters gets a real answer. The same question asked in a setup form gets
+whatever is quickest to type, and then everybody believes it for a year.
+
+A repository that has never been set up may simply be missing its furniture as well - the
+`codefin-setup` skill creates it, once, by hand.
+
 ## When the repository contradicts itself
 
 A README describing one structure while the code ships another, a documented gate no workflow

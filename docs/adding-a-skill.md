@@ -80,6 +80,61 @@ Pick two of your own: one with Conventional Commits, a full CI suite and commit 
 with prose commits and no workflows at all. Opposite rules about commit attribution make a good
 third axis.
 
+## Who reaches it: the invocation choice
+
+A skill is reached one of two ways, and the choice spends one of two budgets.
+
+**Context load** is what always-loaded material costs the agent: a skill's `description` sits in
+context every turn of every session, spending tokens and attention whether or not the skill ever
+fires. **Cognitive load** is what it costs the human: remembering the skill exists at all.
+
+| | Reached by | Costs |
+| :-- | :-- | :-- |
+| **model-invoked** (default) | the agent, on its own, plus anyone typing its name | context load, every turn, forever |
+| **user-invoked** (`disable-model-invocation: true`) | only a person typing its name | nothing in context; the human is the index |
+
+Choose model-invoked only when the agent must reach it without being told - which is true of a
+discipline that should apply whenever the work matches, and false of anything that runs once by
+hand. `codefin-setup` is user-invoked for exactly that reason: paying context load in every
+future session for a skill used once is waste.
+
+A user-invoked skill's description is written for the person reading a list, not for the model:
+one line, no trigger vocabulary.
+
+## The description is a pointer, so cut it hardest
+
+A model-invoked skill's `description` is the only part of it that is always loaded. Everything
+else is read on demand. That makes it the most expensive text in the skill and the most
+important: its **wording**, not the quality of what it points at, decides whether the skill fires
+when it should.
+
+- **Lead with the trigger, not with identity.** "Business analysis at Codefin. Use when..." spends
+  its first and most valuable words saying what the body already says. Start where the work is.
+- **One trigger per case.** Synonyms for the same situation are one case written twice.
+- **Only the cases that should actually fire it.** A description listing everything the skill
+  touches fires it on everything.
+
+## Steps need a completion criterion
+
+Every step should say what condition ends it, in words the agent can check. Two things make that
+work:
+
+- **Can it tell done from not-done?** A vague bound invites finishing early, with attention
+  already on the next step. "Understanding reached" is not a bound; "the cause written as one
+  sentence" is.
+- **How much does it demand?** "Every consumer in the table accounted for" produces thorough work
+  where "check the consumers" produces a gesture at it. The exhaustiveness bar is what makes a
+  procedure hold up when someone is tired and the release is Friday.
+
+## Commands are shortcuts, never the only route
+
+A command is a starting point. It may read the skill's references; it must **never invoke another
+command**, or the paths through the work stop being traceable.
+
+And every command must be a shortcut to a procedure that is written down in `references/`. This
+has a mechanical reason as well as a design one: `npx skills` installs skills but not commands,
+so a procedure reachable only through a command does not exist for those users.
+
 ## Shape
 
 ```
@@ -117,3 +172,11 @@ only sometimes relevant goes in `references/` and gets pointed at from the table
    slash commands, so a command must be a shortcut to a procedure that is written down in
    `references/`, never the only way to reach it.
 5. Slash commands appear only in a **new** session; the list is read at startup.
+
+## Where these ideas came from
+
+The invocation choice, the two loads, the description as a pointer, and completion criteria are
+taken from Matt Pocock's [skills repository](https://github.com/mattpocock/skills) - see its
+`writing-for-agents` skill and that skill's `SKILL-MECHANICS.md`. The explore-then-ask-only-the
+-unsettled shape of `codefin-setup` comes from the same place. Worth reading in full before
+writing a skill here.

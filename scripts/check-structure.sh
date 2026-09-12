@@ -41,8 +41,15 @@ for s in plugins/*/skills/*/SKILL.md; do
   head -1 "$s" | grep -q '^---$' || { bad "$s has no frontmatter"; continue; }
   got=$(awk 'NR>1 && /^---$/{exit} NR>1' "$s" | sed -n 's/^name:[[:space:]]*//p' | tr -d '"')
   desc=$(awk 'NR>1 && /^---$/{exit} NR>1' "$s" | sed -n 's/^description:[[:space:]]*//p')
+  nomodel=$(awk 'NR>1 && /^---$/{exit} NR>1' "$s" | sed -n 's/^disable-model-invocation:[[:space:]]*//p')
   [ "$got" = "$dir" ] && note "ok   $dir" || bad "$s says name=$got but lives in $dir/"
-  [ -n "$desc" ] || bad "$s has no description - it is how the model decides to load the skill"
+  # A model-invoked skill needs a description: it is the always-loaded pointer the model
+  # decides on. A user-invoked one (disable-model-invocation: true) is reached only by a
+  # person typing its name, so its description is for the human and may be brief - but a
+  # skill with neither is unreachable by anybody.
+  if [ -z "$desc" ] && [ "$nomodel" != "true" ]; then
+    bad "$s has no description and is not user-invoked - nothing can reach it"
+  fi
 done
 
 echo

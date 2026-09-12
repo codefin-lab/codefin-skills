@@ -91,6 +91,9 @@ A new repository starts with:
 
 Starting with the gate is much easier than adding it to a repository that has grown without one.
 
+The `codefin-setup` skill creates whichever of these are missing, once, and asks only about the
+things the repository could not have told it.
+
 ## Language
 
 Code, comments, commits, documentation in the repository: English. Conversation with the team and

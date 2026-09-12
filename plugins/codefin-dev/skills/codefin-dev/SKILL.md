@@ -1,6 +1,6 @@
 ---
 name: codefin-dev
-description: "How Codefin builds software. Use when writing, reviewing, testing, scaffolding or releasing code in any Codefin or client repository, when investigating or fixing a defect, when deciding commit messages, branch names, repository layout or review gates, and when working out what belongs to the BA, QA or Dev."
+description: "Writing, reviewing or releasing code, investigating or fixing a defect, and deciding commit messages, branch names, repository layout or review gates - in any repository, by reading its conventions first."
 ---
 
 # Building software at Codefin

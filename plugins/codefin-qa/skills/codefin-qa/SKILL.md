@@ -1,6 +1,6 @@
 ---
 name: codefin-qa
-description: "Quality assurance at Codefin. Use when designing test scenarios or cases from acceptance criteria, maintaining the test register, writing or reviewing test automation, planning or running a SIT round, choosing what to regression test, running exploratory sessions, taking a customer through UAT, or deciding whether something has been proved."
+description: "Designing test scenarios and cases from acceptance criteria, keeping the test register and its coverage honest, writing automation, running a test round, exploratory testing, taking a customer through UAT, or reporting a defect."
 ---
 
 # Quality assurance at Codefin

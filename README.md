@@ -2,9 +2,10 @@
 
 Skills for Claude Code and other agents, from Codefin.
 
-Three skills covering how software gets agreed, built and proved. They are written as **general
-standards**, not as a record of any one project, so they are useful outside the company that
-wrote them. That is why this is public: take what is useful.
+Skills covering how software gets agreed, built and proved, plus one that gets a repository
+ready for them. They are written as **general standards**, not as a record of any one project, so
+they are useful outside the company that wrote them. That is why this is public: take what is
+useful.
 
 Codefin's document and brand house style is a separate, private package.
 
@@ -20,9 +21,10 @@ being asked: it reads a repository's conventions before writing in it, runs the 
 reporting a fix, checks what else depends on the code it is about to change, and refuses to
 call an acceptance criterion finished when nobody could check it.
 
-## The three skills
+## The skills
 
-They follow the delivery chain, and hand off through the same two identifiers.
+Three follow the delivery chain, handing off through the same two identifiers. A fourth,
+`codefin-setup`, runs once at the start and then never again.
 
 ```
 codefin-ba        what we agreed to build
@@ -110,6 +112,23 @@ answer of its own.
 Ships `/codefin-dev:defect`, `blast-radius.sh`, and templates for tests in three languages, CI
 workflows, an ADR, a defect record and the handoff checklists.
 
+---
+
+### `codefin-setup` — getting a repository ready
+
+Run once per repository, by hand. It creates the furniture that is missing — `CONTEXT.md`, a
+first ADR, `.env.example`, the four test targets and a pull request gate — and records the few
+things a repository cannot tell you itself.
+
+**It never asks what the files already answer.** It explores first, shows what it found, and
+skips every question exploration settled. Only three things are genuinely unknowable from a
+repository: where the agreement lives, what the environments are and how you see a change
+running, and where work is tracked. Those go into `CLAUDE.md`, not a profile file, so they are
+edited alongside the code and cannot go stale unnoticed.
+
+Deliberately **user-invoked**: it is never reached by the model on its own, so it costs nothing
+in context for the rest of the project's life. Ask for it by name.
+
 ## The scripts
 
 A pattern turned up while writing these: each role has one tedious job it reliably skips, and
@@ -148,6 +167,9 @@ name - you describe the task.
 | "plan the next SIT round" | entry criteria checked, selection by risk, exclusions written down, report with the tally |
 | "the customer says the export is wrong" | it is classified as a defect or a CR against the document before anyone starts fixing |
 
+`codefin-setup` is the exception: it never fires on its own, because a repository is set up
+deliberately or not at all. Ask for it by name the first time you bring these skills to a project.
+
 The slash commands are for when you want the whole procedure driven end to end:
 
 ```
@@ -158,6 +180,8 @@ The slash commands are for when you want the whole procedure driven end to end:
 
 ### A worked pass through the chain
 
+0. **Once per repository**, `codefin-setup` creates what is missing and asks only about what the
+   files could not have told it.
 1. **The BA** writes `US-3.4` with acceptance criteria, runs `check-requirements.sh` over the
    copy the customer actually holds, and sends back anything nobody could check.
 2. **QA** derives `TS-900` from those criteria, expands it into cases at the boundaries and

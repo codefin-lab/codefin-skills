@@ -1,6 +1,6 @@
 ---
 name: codefin-ba
-description: "Business analysis at Codefin. Use when eliciting requirements from a customer, writing or amending a BRD or FSD, writing acceptance criteria, deciding what is in and out of scope, sizing a feature list, assessing or pricing a change request, or judging whether a customer request is a defect or a CR."
+description: "Eliciting requirements, writing or amending a BRD or FSD, writing acceptance criteria, drawing the scope line, sizing a feature list, or judging whether a customer request is a defect or a change request."
 ---
 
 # Business analysis at Codefin

@@ -67,5 +67,4 @@ test in a blocking gate, and never make re-running a red build the normal way to
 Whether a gate ran in CI or you ran it yourself, the report says what ran and what it found -
 which layers, how many cases, how many passed, what was skipped and why.
 
-For a round of fixes, the report also carries the defects found and fixed, the running tally
-across rounds, and how many P0, P1 and P2 remain open.
+A round of fixes carries more than that; the counting rule is in `references/defects.md`.
