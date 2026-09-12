@@ -20,13 +20,22 @@ identifiers - what was agreed, and how it gets proved.
 | :-- | :-- |
 | `codefin-ba` | **what we agreed to build.** Eliciting decisions rather than opinions, requirements and acceptance criteria that can be proved, holding the scope line, sizing honestly. Ships `/codefin-ba:requirements` and `check-requirements.sh`. |
 | `codefin-dev` | **how it gets built and repaired.** The three test layers run as gates without being asked, the defect procedure that keeps a fix closed, where project knowledge lives, and the handoffs. Ships `/codefin-dev:defect` and `blast-radius.sh`. |
+| `codefin-qa` | **whether it has been proved.** Deriving scenarios from acceptance criteria, keeping the register and its coverage honest, automation worth having, running a round, and taking a customer through UAT. Ships `/codefin-qa:round` and `trace-gaps.sh`. |
+
+Two identifiers run the length of the chain — what was agreed, and how it gets proved — so a
+failing test names the promise it broke, and a customer's complaint can be traced to the case
+that should have caught it.
 
 A pattern turned up while writing them: each role has one tedious job it reliably skips, and
-skipping it is what later goes wrong. So each skill ships a script for exactly that job — the BA
-checking that every requirement can actually be proved, the developer checking what else depends
-on the code about to change.
+skipping it is what later goes wrong. So each skill ships a script for exactly that job.
 
-Still to come: the QA skill, and possibly delivery and packaging.
+| Role | Skips | Script |
+| :-- | :-- | :-- |
+| BA | checking every requirement can actually be proved | `check-requirements.sh` |
+| Dev | checking what else depends on the code about to change | `blast-radius.sh` |
+| QA | checking the chain from requirement to proof is unbroken | `trace-gaps.sh` |
+
+Possibly to come: delivery and packaging.
 
 ## Install
 

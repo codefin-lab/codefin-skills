@@ -1,0 +1,12 @@
+{
+  "name": "codefin-qa",
+  "version": "0.1.0",
+  "description": "Codefin house style for quality assurance: deriving scenarios from acceptance criteria, keeping the test register honest, automating what is worth automating, running a test round, and taking a customer through UAT.",
+  "author": {
+    "name": "Codefin Company Limited",
+    "url": "https://github.com/codefin-lab"
+  },
+  "repository": "https://github.com/codefin-lab/codefin-skills",
+  "license": "MIT",
+  "keywords": ["codefin", "qa", "testing", "sit", "uat", "test-automation", "traceability"]
+}

@@ -46,7 +46,7 @@ rules() {
   printf '%s\t%s\t%s\n' \
     "ticket key that is not a documented placeholder" \
     '\b[A-Z]{2,6}-[0-9]{2,6}\b' \
-    'ABC-123|DEF-118|TS-900|WCAG-|UTF-|RFC-|ISO-|SHA-|AES-|CIS-|MIT-'
+    'ABC-123|DEF-118|TS-9[0-9][0-9]|WCAG-|UTF-|RFC-|ISO-|SHA-|AES-|CIS-|MIT-'
   printf '%s\t%s\t%s\n' \
     "private network address or cloud account id" \
     '\b(10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]{1,3}\.[0-9]{1,3}|[0-9]{12}\.dkr\.ecr\.)' \

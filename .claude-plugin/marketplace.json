@@ -17,6 +17,11 @@
       "name": "codefin-ba",
       "source": "./plugins/codefin-ba",
       "description": "Business analysis: turning what a customer says into requirements that can be built and acceptance criteria that can be proved, sized honestly, with the scope line held."
+    },
+    {
+      "name": "codefin-qa",
+      "source": "./plugins/codefin-qa",
+      "description": "Quality assurance: deriving scenarios from acceptance criteria, keeping coverage honest, running a round, and proving it to the customer at UAT."
     }
   ]
 }
