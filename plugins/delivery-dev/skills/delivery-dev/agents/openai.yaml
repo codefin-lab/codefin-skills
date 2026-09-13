@@ -1,0 +1,5 @@
+# Display metadata for Codex and agents that follow its spec. The skill itself is in
+# SKILL.md; this only affects how it is presented.
+interface:
+  display_name: "Building Software"
+  short_description: "Read the repo, fix the cause, run the gates"

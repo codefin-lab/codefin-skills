@@ -1,0 +1,5 @@
+# Display metadata for Codex and agents that follow its spec. The skill itself is in
+# SKILL.md; this only affects how it is presented.
+interface:
+  display_name: "Product Owner"
+  short_description: "Is it worth doing, and in what order"

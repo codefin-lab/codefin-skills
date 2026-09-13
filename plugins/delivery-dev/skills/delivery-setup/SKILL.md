@@ -1,7 +1,8 @@
 ---
 name: delivery-setup
 description: "Set a repository up for the delivery skills: create the furniture it is missing, install the test gate, and record the few things the repository cannot tell you itself. Run once, by hand."
-disable-model-invocation: true
+disable-model-invocation: true   # Claude Code
+allow_implicit_invocation: false  # Codex, and agents that follow its spec
 ---
 
 # Setting a repository up
