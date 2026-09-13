@@ -61,7 +61,7 @@ Name each case for whichever identifier it actually descends from, and cite the 
 ```
 TS-900 (US-3.4) a portfolio with no holdings shows the empty state, not an error
 US-3.4 holdings are totalled across currencies at the given rate
-DEF-118 (US-3.4) a holding with a null valuation date no longer aborts the page
+DEF-901 (US-3.4) a holding with a null valuation date no longer aborts the page
 ```
 
 The first is QA's, the second is a developer's unit test of the same requirement, and the third

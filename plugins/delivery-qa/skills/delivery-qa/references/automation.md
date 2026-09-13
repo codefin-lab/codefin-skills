@@ -29,7 +29,7 @@ itself without anyone opening the register:
 
 ```
 TS-900 (US-3.4) an account with no holdings shows the empty state
-DEF-118 (US-3.4) a holding with no valuation date no longer aborts the summary
+DEF-901 (US-3.4) a holding with no valuation date no longer aborts the summary
 ```
 
 The file carries the scenario id too, so the register's "Automated" column can point at it and

@@ -42,7 +42,7 @@ func TestSummarise(t *testing.T) {
 			want: Summary{Count: 2, Total: 350},
 		},
 		{
-			name:    "DEF-118 (US-3.4) a repository failure surfaces instead of reporting zero",
+			name:    "DEF-901 (US-3.4) a repository failure surfaces instead of reporting zero",
 			repo:    fakeHoldings{err: errATimeout},
 			wantErr: errATimeout,
 		},

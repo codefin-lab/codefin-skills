@@ -44,7 +44,7 @@ def test_summarise(repo: FakeHoldings, expected: Summary) -> None:
 
 
 def test_summarise_surfaces_repository_failure() -> None:
-    """DEF-118 (US-3.4) a repository failure surfaces instead of reporting zero."""
+    """DEF-901 (US-3.4) a repository failure surfaces instead of reporting zero."""
     boom = TimeoutError("timeout")
 
     with pytest.raises(TimeoutError):

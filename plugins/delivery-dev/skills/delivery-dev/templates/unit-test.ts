@@ -34,7 +34,7 @@ describe("summarise", () => {
     await expect(summarise(repo, "acct-1")).resolves.toEqual(expected);
   });
 
-  it("DEF-118 (US-3.4) a repository failure surfaces instead of reporting zero", async () => {
+  it("DEF-901 (US-3.4) a repository failure surfaces instead of reporting zero", async () => {
     const boom = new Error("timeout");
     await expect(summarise(holdingsFailing(boom), "acct-1")).rejects.toThrow(boom);
   });

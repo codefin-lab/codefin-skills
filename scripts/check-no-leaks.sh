@@ -58,10 +58,16 @@ rules() {
 }
 
 # Identifier prefixes that are known-safe here: the documented placeholders, plus anything a
-# fork adds. A fork tracking real work in this repository will have its own ticket keys, and
+# fork adds.
+#
+# This list is APPEND-ONLY for anything that has ever been pushed. --history reads published
+# commits, which cannot be changed without rewriting them, so narrowing the list retroactively
+# fails the past rather than the present. DEF-118 is a retired placeholder kept for exactly
+# that reason: examples use the 9xx range now, but the old id is still in the history and is
+# still safe. A fork tracking real work in this repository will have its own ticket keys, and
 # they are not leaks - $LEAK_ALLOW or a .leakallow file (one extended regex per line) says so.
 allowlist() {
-  local base='ABC-123|DEF-118|TS-9[0-9][0-9]|ADR-|WCAG-|UTF-|RFC-|ISO-|SHA-|AES-|CIS-|MIT-'
+  local base='ABC-123|(TS|DEF)-9[0-9][0-9]|DEF-118|ADR-|WCAG-|UTF-|RFC-|ISO-|SHA-|AES-|CIS-|MIT-'
   local extra=""
   [ -n "${LEAK_ALLOW:-}" ] && extra=$(printf '%s' "$LEAK_ALLOW" | tr '\n' '|')
   [ -z "$extra" ] && [ -f .leakallow ] && extra=$(grep -vE '^\s*(#|$)' .leakallow | tr '\n' '|')

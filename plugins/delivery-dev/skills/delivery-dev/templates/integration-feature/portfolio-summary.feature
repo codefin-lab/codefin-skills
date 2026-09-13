@@ -24,7 +24,7 @@ Feature: TS-900 Portfolio summary (US-3.4)
     And the database row for "acct-1" in "portfolio_summary" has "holding_count" of 2
 
   # A regression test earned from a defect, named so the link back is obvious.
-  Scenario: DEF-118 (US-3.4) a holding with no valuation date does not abort the summary
+  Scenario: DEF-901 (US-3.4) a holding with no valuation date does not abort the summary
     Given account "acct-1" holds an instrument with no valuation date
     When I request the portfolio summary for "acct-1"
     Then the response status is 200

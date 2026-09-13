@@ -296,6 +296,11 @@ The slash commands are for when you want the whole procedure driven end to end:
 /delivery-pm:steering      march report, features.xlsx
 ```
 
+**[docs/examples.md](docs/examples.md) walks one project through every role** - the same
+statement service from the product owner's first ordering decision to the steering report,
+with the real output of each script at the point it is used. Start there if you would rather see
+it than read about it.
+
 ### A worked pass through the chain
 
 0. **Once per repository**, `delivery-setup` creates what is missing and asks only about what the
@@ -412,7 +417,9 @@ separately from its tools**, so it survives the next language or vendor.
 .github/workflows/pr.yml           this repository's own gate
 scripts/                           check-no-leaks, check-structure, check-templates
 tests/fixtures/                    minimal projects the templates are run against
-docs/adding-a-skill.md             how to add the next skill
+docs/
+  examples.md                      one project walked through every role
+  adding-a-skill.md                how to add the next skill
 plugins/<skill>/
   .claude-plugin/plugin.json
   commands/                        slash commands the skill ships

@@ -26,7 +26,8 @@ refactor(batchload)!: drop bufferDepth - the knob measured no gain
 ```
 
 Identifiers in examples throughout these skills are deliberately fictional: `ABC-123` for a
-ticket, the `TS-9xx` range for a test scenario, `DEF-118` for a defect. Never paste a real one
+ticket, and the **9xx range** for anything this process numbers itself - `TS-9xx` for a test
+scenario, `DEF-9xx` for a defect. Never paste a real one
 from a client project into shared material - the pre-push check refuses anything outside those
 ranges, which is the point.
 
