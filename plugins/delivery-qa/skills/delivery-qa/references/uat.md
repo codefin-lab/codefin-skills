@@ -4,6 +4,11 @@ UAT is not another round of testing. It is the customer satisfying themselves th
 agreed was delivered - and it is the moment the whole chain gets checked in public. Everything
 this skill and the BA skill do lands here.
 
+*Your own product*: there is no UAT session, but the equivalent exists - releasing to a slice of
+real users and watching what they actually do. The discipline below still applies to that:
+nothing is seen first by users that the team has not already walked, and known defects are
+stated before someone finds them.
+
 ## It is a rehearsal, not a discovery
 
 **Nothing should be seen first at UAT.** Every scenario the customer will walk has been run and

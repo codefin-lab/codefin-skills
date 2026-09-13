@@ -32,7 +32,8 @@ it leaves an ADR.** That includes a defect fix that changes an approach
 (`references/defects.md`, step 7).
 
 An ADR is short - a page. What the decision was, what was going on that forced it, what else was
-considered, what it costs. `templates/adr-template.md` has the shape.
+considered, what it costs. The template and the guidance on which decisions warrant one live
+with the architect (`delivery-sa`, `references/architecture.md`).
 Where a repository already keeps `docs/adr/`, match the format it uses rather than introducing
 a second one.
 

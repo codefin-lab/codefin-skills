@@ -1,10 +1,22 @@
 # From the agreement to the release, and who hands what to whom
 
-The BA, QA and Dev disagreeing is rarely disagreement. It is three people working from three
-different understandings of the same sentence. **This process assumes the BA is also the product
-owner**, so one person holds both what was agreed and what it is worth - which removes a seam,
-and puts all the more weight on the document being right. The cure is that everyone works from the document
+People on a project disagreeing is rarely disagreement. It is several people working from
+different understandings of the same sentence. The cure is that everyone works from the document
 the customer also holds, and that the document is edited before the code, never after.
+
+**This page is the one place the roles are defined.** Every other skill points here rather than
+restating it, so there is one answer to who owns what.
+
+## Two modes
+
+Most of this process is written for **client work**: a scope agreed in a document, changes
+priced as change requests, a budget in days, a steering committee. That is the common case and
+the sharp rules exist because of it.
+
+For **a product of your own**, the same shapes hold with different mechanics: the backlog
+replaces the agreed scope, reprioritising replaces the change request, team capacity replaces
+the sold budget, and internal stakeholders replace the steering committee. Where a rule differs,
+it says so on the spot. Where it says nothing, it applies either way.
 
 ## The document comes first
 
@@ -75,24 +87,53 @@ Short lists, meant to be read in under a minute.
 - defects still open, with severity
 - which tests were added to the permanent suite
 
+## The six roles
+
+What each owns, and - just as important - what each does not. The second column is the one that
+prevents the arguments, because most of them are somebody answering a question that was not
+theirs.
+
+| Role | Owns | Does not own |
+| :-- | :-- | :-- |
+| **PO** | product goal and value, scope, priority, MVP, backlog order, accepting or rejecting the outcome | technical design, the project schedule |
+| **BA** | requirement analysis, business rules, use cases, workflow, edge cases, functional and non-functional requirements, acceptance criteria | priority, architecture |
+| **SA** | architecture, component, API and data design, how a non-functional requirement is met, integration, security, technical trade-offs | business priority |
+| **Dev** | implementation, unit tests, technical breakdown and the detailed estimate | product priority |
+| **QA** | test strategy and cases, traceability, verification, regression | product scope decisions |
+| **PM** | delivery plan, milestones, dependencies, resources, coordinating estimates, risks and issues, progress | product requirements, architecture |
+
+One person often holds several of these - a BA who is also the product owner, a lead who is also
+the architect. **That is a staffing question, not a change to who owns what.** Write down who is
+wearing which hat, because the failure mode is everyone assuming somebody else was.
+
+*Client work*: the product owner is frequently on the customer's side. Name who plays the role
+on our side and what they may decide without asking, or every priority question becomes a
+week-long email thread.
+
 ## Who decides what
 
 Most stand-offs dissolve once this is said out loud.
 
 | Question | Whose call |
 | :-- | :-- |
-| is this what the customer agreed to, and is it worth doing | BA |
+| is it worth doing, in what order, what is the MVP, do we accept this | PO |
+| what exactly is needed, what are the rules, what are the acceptance criteria | BA |
+| what shape do we build it in, what do we trade against what | SA |
+| how is it written, how does it break down, how long does it take | Dev |
 | has it been proven, and is the evidence good enough | QA |
-| how it is built or repaired | Dev |
-| when, at what cost, and what gets cut | PM |
+| when, at what cost, what gets cut, do we ship | PM |
 
-QA does not decide whether a behaviour is desirable; they decide whether the claim is proven.
-The PM does not decide whether something is proved - but does decide whether to ship anyway,
-which is a legitimate call and a recorded one (`delivery-pm`).
-The BA does not decide how a thing is implemented. Dev does not decide that an AC is
-unimportant.
-When the answer is genuinely contested, it goes back to the document, and the document is
-amended or it is not.
+Three decisions get confused constantly and are not the same:
+
+- **QA decides it is proved.** Evidence, not opinion about whether the behaviour is desirable.
+- **The PO decides it is accepted.** Against the acceptance criteria - something can be proved
+  to work and still not be what was wanted.
+- **The PM decides it ships.** Sometimes against QA's recommendation, which is legitimate and
+  is recorded (`delivery-pm`).
+
+The BA does not decide how a thing is implemented. Dev does not decide that an acceptance
+criterion is unimportant. The SA does not decide what is worth building. When the answer is
+genuinely contested, it goes back to the document, and the document is amended or it is not.
 
 ## Through a release
 

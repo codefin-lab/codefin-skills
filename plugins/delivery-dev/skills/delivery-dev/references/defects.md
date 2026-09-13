@@ -107,7 +107,8 @@ inconsistent, half-applied fixes reach the customer.
 
 Fix the cause you wrote in step 4, not the symptom. If the repair changes how the system
 behaves - rather than restoring behaviour that was already agreed - **leave an ADR behind**
-(`templates/adr-template.md`). Without it, the next person meets the same question and decides
+(`delivery-sa`, `templates/adr-template.md`), and where the change is architectural, it is the
+architect's call rather than yours to make alone. Without it, the next person meets the same question and decides
 differently, which is where "everyone fixes it their own way" begins.
 
 ## 8. Make the reproduction permanent

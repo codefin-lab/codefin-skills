@@ -1,7 +1,7 @@
 # delivery-skills
 
-Skills for Claude Code and other agents: how software gets agreed, built, proved and managed,
-plus one that gets a repository ready for them.
+Skills for Claude Code and other agents: one role each, covering how software gets decided,
+specified, designed, built, proved and managed - plus one that gets a repository ready for them.
 
 They describe **one opinionated process**, written so that anyone can run it. The opinions are
 real and load-bearing - they came from delivering software to customers, not from a textbook -
@@ -12,11 +12,9 @@ but nothing in them is tied to the company that wrote them. Take what is useful.
 Three assumptions are stated out loud in the skills rather than hidden, because your team may be
 arranged differently:
 
-- **the BA is also the product owner**, so one person holds both what was agreed and what it is
-  worth. Where those are two people, the handoffs gain a seam.
 - **QA writes the automation**, rather than specifying cases for developers to automate.
-- **the BA estimates and the PM owns the budget** that estimate implies - the PM watches cost and
-  timeline rather than judging requirements.
+- **estimation happens twice**: the BA sizes roughly so the work can be priced and ordered, Dev
+  estimates in detail once the shape is known, and the PM coordinates the two and owns the budget.
 - **the BRD - some customers call the same document an FSD - is the agreement**, and everything
   downstream carries its requirement identifier.
 
@@ -39,10 +37,39 @@ being asked: it reads a repository's conventions before writing in it, runs the 
 reporting a fix, checks what else depends on the code it is about to change, and refuses to
 call an acceptance criterion finished when nobody could check it.
 
+## Two modes
+
+Most of this is written for **client work**: a scope agreed in a document, changes priced as
+change requests, a budget in days, a steering committee. That is the common case, and the rules
+are sharp because of it.
+
+For **a product of your own** the same shapes hold with different mechanics - a backlog instead
+of an agreed scope, reprioritising instead of a change request, team capacity instead of a sold
+budget, internal stakeholders instead of a committee. Where a rule differs, it says so on the
+spot. Where it says nothing, it applies either way.
+
 ## The skills
 
-Three follow the delivery chain, handing off through the same two identifiers. A fourth,
-`delivery-setup`, runs once at the start and then never again.
+One per role. Each owns a question, and - just as important - each says what it does **not**
+own, because most project arguments are somebody answering a question that was not theirs. The
+roles are defined once, in `delivery-dev` under `references/workflow.md`.
+
+| Role | Owns | Does not own |
+| :-- | :-- | :-- |
+| `delivery-po` | goal and value, scope, priority, MVP, backlog order, accepting the outcome | technical design, the schedule |
+| `delivery-ba` | requirement analysis, rules, use cases, edge cases, functional and non-functional requirements, acceptance criteria | priority, architecture |
+| `delivery-sa` | architecture, component, API and data design, how an NFR is met, integration, security, trade-offs | business priority |
+| `delivery-dev` | implementation, unit tests, technical breakdown and the detailed estimate | product priority |
+| `delivery-qa` | test strategy and cases, traceability, verification, regression | product scope decisions |
+| `delivery-pm` | plan, milestones, dependencies, resources, coordinating estimates, risk, progress | product requirements, architecture |
+
+One person often wears several hats. That is a staffing arrangement, not a merging of the jobs -
+write down who is wearing which, because the failure mode is everyone assuming somebody else was.
+
+`delivery-setup` is the odd one out: it runs once at the start of a repository and then never
+again.
+
+Three of them hand off through the same two identifiers.
 
 ```
 delivery-ba        what we agreed to build
@@ -61,6 +88,23 @@ delivery-pm        when, at what cost, and what gets cut
 A failing test names the clause of the agreement that is now untrue. A customer's complaint can
 be traced to the case that should have caught it. That is the whole point of the chain, and
 everything else is in service of it.
+
+---
+
+### `delivery-po` — is it worth doing, and in what order
+
+Fires when you are setting or challenging a goal, drawing the scope boundary, choosing a
+minimum, ordering a backlog, or accepting a delivered outcome.
+
+The whole role reduces to saying no well. Anyone can list what would be nice; the value is in
+the order, and in what is left out.
+
+| Reference | Covers |
+| :-- | :-- |
+| `value.md` | a goal is an outcome you could tell happened, not a list of features |
+| `scope-and-mvp.md` | exclusions written as deliberately as inclusions; the smallest thing that settles a question |
+| `priority.md` | MoSCoW where Must means the release is worthless without it; what to do when everything is urgent |
+| `acceptance.md` | proved, accepted and shipped are three different judgements by three different people |
 
 ---
 
@@ -110,6 +154,27 @@ charter, a UAT walkthrough and a testability-gap list.
 
 ---
 
+### `delivery-sa` — what it is built out of, and what was traded
+
+Fires when you are choosing a shape, designing an API, schema or data model, working out how a
+non-functional requirement will actually be met, integrating with a system you do not control,
+or making a security decision.
+
+Its output is mostly decisions and the reasons behind them. A diagram with no reasoning is a
+picture; the reasoning is what lets the next person tell whether the decision still holds.
+
+| Reference | Covers |
+| :-- | :-- |
+| `architecture.md` | decide late, record immediately; what warrants an ADR; naming what you traded |
+| `interfaces.md` | anything published is a contract; design outward from the caller; versioning before the first consumer |
+| `nfr.md` | a requirement becomes a mechanism, a cost, and a defined failure behaviour - or it is a hope |
+| `integration.md` | make one real call before estimating; assume unavailable, slow and wrong |
+| `security.md` | the handful of decisions that are architectural, and why a leaked secret needs rotating rather than deleting |
+
+Ships `adr-template.md` and `nfr-table.md`.
+
+---
+
 ### `delivery-dev` — how it gets built and repaired
 
 Fires when you are writing, reviewing or releasing code, investigating a defect, or deciding
@@ -127,6 +192,7 @@ answer of its own.
 | `detect.md` | reading a repository's conventions before writing in it |
 | `knowledge.md` | where project knowledge lives so it cannot go stale unnoticed |
 | `workflow.md` | the handoffs between the BA, QA and Dev |
+| `breakdown.md` | breaking work down until an estimate stops being a guess, and counting what is not typing |
 | `conventions.md` | house defaults for a greenfield project |
 | `stacks.md` | the only file that names specific tools |
 
@@ -256,6 +322,8 @@ claude plugin install delivery-ba@delivery-skills
 claude plugin install delivery-dev@delivery-skills
 claude plugin install delivery-qa@delivery-skills
 claude plugin install delivery-pm@delivery-skills
+claude plugin install delivery-po@delivery-skills
+claude plugin install delivery-sa@delivery-skills
 ```
 
 Claude Code only. Brings the skills **and** the slash commands, and updates with

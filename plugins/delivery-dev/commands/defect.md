@@ -48,7 +48,7 @@ Do not begin investigating until the record exists.
    receive your fix. Write the findings into the record **even when nothing is affected**.
 5. **Look sideways** for the same mistake written elsewhere.
 6. **Fix the cause**, not the symptom. If this decides how something works rather than restoring
-   agreed behaviour, write an ADR from `templates/adr-template.md`.
+   agreed behaviour, write an ADR (`delivery-sa`, `templates/adr-template.md`).
 7. **Make the reproduction permanent**, at the layer where the cause lives, named for the defect
    and the `US` it violates.
 8. **Run the gates yourself. Do not wait to be asked.** Unit, then integration, then e2e,

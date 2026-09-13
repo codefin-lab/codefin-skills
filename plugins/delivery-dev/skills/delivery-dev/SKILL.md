@@ -82,6 +82,7 @@ argument starts: anything not written in the scope is a CR.
 | starting in an unfamiliar repository | `references/detect.md` |
 | deciding where a piece of project knowledge should live | `references/knowledge.md` |
 | handing work to or from the BA or QA, or planning a release | `references/workflow.md` |
+| breaking work down, or estimating it after the shape is known | `references/breakdown.md` |
 | opening a greenfield project, or a repository is silent on a point | `references/conventions.md` |
 | needing the tools for a specific language | `references/stacks.md` |
 

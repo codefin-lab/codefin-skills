@@ -9,6 +9,12 @@ This role owns **when, at what cost, and what gets cut**. It does not own what t
 do, or whether it works - those belong to the BA and to QA, and the fastest way to lose a
 project is for the person watching the budget to start answering those questions too.
 
+Most of this skill is written for **client work**: a scope sold in days, changes priced as
+change requests, a steering committee. For **a product of your own** the shapes hold with
+different mechanics - team capacity instead of a sold budget, reprioritising instead of a change
+request, internal stakeholders instead of a committee. Where a rule differs it says so; where it
+says nothing it applies either way.
+
 The job is mostly **arithmetic on other people's output**, done honestly and early:
 
 ```

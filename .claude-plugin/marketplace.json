@@ -27,6 +27,16 @@
       "name": "delivery-pm",
       "source": "./plugins/delivery-pm",
       "description": "Running the project: the plan, the money, the risks and the steering report - assembled from what the other three produce, so the numbers reported are the numbers that happened."
+    },
+    {
+      "name": "delivery-po",
+      "source": "./plugins/delivery-po",
+      "description": "Owning the product or the scope: goal and value, what is in and out, what order, what the minimum is, and whether the result is accepted."
+    },
+    {
+      "name": "delivery-sa",
+      "source": "./plugins/delivery-sa",
+      "description": "Solution architecture: the shape it is built in, the interfaces it publishes, how the non-functional requirements are actually met, and the trade-offs behind each - written down where the next person will meet them."
     }
   ]
 }

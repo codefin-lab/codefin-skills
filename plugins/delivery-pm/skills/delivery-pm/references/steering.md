@@ -4,6 +4,10 @@ A steering committee needs three things and has no use for the rest: **where the
 against what was agreed, what decisions are needed from them, and what is going wrong early
 enough to act on.**
 
+*Your own product*: the audience is internal and there is no contract to report against, but the
+three things do not change - where it stands against what was planned, what needs deciding, and
+what is going wrong. Drop the scope and budget sections; keep the forecast and the decisions.
+
 Everything else - activity summaries, what the team did last fortnight, screenshots - makes the
 report longer and its signal weaker.
 

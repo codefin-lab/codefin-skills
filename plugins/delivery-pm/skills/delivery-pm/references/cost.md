@@ -3,6 +3,9 @@
 Cost control on a fixed-scope project is one question asked continuously: **at the rate we are
 actually going, what will this have cost when it is finished?**
 
+*Your own product*: the question is the same with capacity in place of budget - at this rate,
+what will be left undone when the cycle ends, and is that the right thing to be left undone?
+
 Not how much has been spent. That is bookkeeping, and it is always reassuring.
 
 ## The only two numbers that matter together

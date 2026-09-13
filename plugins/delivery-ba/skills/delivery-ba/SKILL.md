@@ -10,9 +10,21 @@ changes nothing. Everything downstream hangs off it - QA derives scenarios from 
 criteria, developers build against it, and a customer complaint is judged against it. So the
 quality of the analysis sets the ceiling on everything after it.
 
-**This process assumes the BA is also the product owner.** One person holds both what was agreed
-and what it is worth, which removes a seam and puts all the more weight on getting the document
-right. Where those are two people, the handoffs gain one.
+The BA owns **what exactly is needed** - the rules, the cases, the criteria. Not whether it is
+worth building or in what order, which belong to the PO (`delivery-po`), and not what it is
+built out of, which belongs to the SA (`delivery-sa`). One person often wears more than one of
+these hats; that is a staffing arrangement, not a merging of the jobs. The roles are defined
+once, in the `delivery-dev` skill under `references/workflow.md`.
+
+## Two modes
+
+**Client work**, the common case: the BRD is a contract, changes to it are priced as change
+requests, and it is the document a dispute is settled against. Most of this skill is written for
+that.
+
+**Your own product**: the same analysis, recorded as backlog items rather than as a contract.
+Nothing is priced and nobody argues about scope in writing - but a requirement still needs its
+rules, its edge cases and its criteria, or QA has nothing to test against.
 
 ## What this skill is not
 
@@ -60,7 +72,7 @@ reports the first of them.
 | writing acceptance criteria | `references/acceptance-criteria.md` |
 | structuring requirements, epics and identifiers | `references/requirements.md` |
 | drawing the scope line, or handling a change request | `references/scope-and-change.md` |
-| building a feature list or sizing the work | `references/sizing.md` |
+| building a feature list or sizing the work roughly | `references/sizing.md` |
 | deciding what to model, and how | `references/modelling.md` |
 
 `templates/` holds forms to fill rather than retype. `scripts/check-requirements.sh` reads a

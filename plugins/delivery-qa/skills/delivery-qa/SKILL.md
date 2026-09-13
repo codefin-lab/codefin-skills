@@ -9,6 +9,10 @@ QA decides one question, and it is not whether the system is good.
 
 > **Has the claim been proved?**
 
+Three judgements are confused constantly and are not the same: **QA decides it is proved**, the
+**PO decides it is accepted** (something can be proved and still not be what was wanted), and
+the **PM decides it ships**. Only the first is yours.
+
 What the system *should* do belongs to the BA, and how it is built belongs to Dev. QA owns
 whether the evidence is good enough to say it works - and in this process QA writes the
 automation that produces most of that evidence.

@@ -1,7 +1,16 @@
-# Feature lists and sizing
+# Feature lists and rough sizing
 
 An estimate is a forecast under stated assumptions, not a promise. Write it so that when it
 turns out to be wrong, anyone can see which assumption failed.
+
+**This is the rough number, and rough is the point.** It exists to price the work and to let the
+PO order it, and it is made before anyone has designed anything. The detailed estimate comes
+from Dev once the work is broken down (`delivery-dev`, `references/breakdown.md`), and the PM
+coordinates the two and owns the budget (`delivery-pm`).
+
+When the detailed estimate disagrees with the rough one, the detailed one is better informed -
+say so, change the number, and say what the rough estimate missed. Defending the first figure
+because it was quoted is how a project commits to something nobody believes.
 
 ## The feature list
 
@@ -48,13 +57,15 @@ each is outside our control - which is exactly why it belongs next to the figure
 
 ## Where this hands over
 
-The estimate is the BA's: what a feature costs is a judgement about the work. **The budget it
-implies belongs to the PM**, who tracks what is actually spent against it, forecasts the finish
-from the rate observed rather than the rate hoped for, and decides what gets cut
-(`delivery-pm`).
+| | Who |
+| :-- | :-- |
+| rough size, for pricing and ordering | BA - here |
+| technical breakdown and the detailed estimate | Dev (`delivery-dev`, `references/breakdown.md`) |
+| coordinating the two, and the budget either implies | PM (`delivery-pm`) |
+| deciding what is worth its cost | PO (`delivery-po`) |
 
-Disagreement about an estimate is settled here, not silently padded in the plan - padding hides
-the disagreement and destroys the only baseline anyone had.
+Disagreement about an estimate is settled openly, not silently padded in the plan - padding
+hides the disagreement and destroys the only baseline anyone had.
 
 ## Re-estimating is not failure
 

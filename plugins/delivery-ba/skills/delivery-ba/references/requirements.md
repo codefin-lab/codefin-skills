@@ -15,8 +15,10 @@ worth putting in them.
 Every story links to an objective. A story that links to none is either missing its reason or
 does not belong in this release - both worth knowing before it is built, not after.
 
-Priority is MoSCoW, and it has to mean something: if everything is Must, nothing is. Force the
-question by asking what the customer would ship without if the date could not move.
+**Priority is not yours.** Record what the PO decided (`delivery-po`, `references/priority.md`)
+and challenge it where analysis shows something is impossible without something else - a
+dependency is a fact, not a preference. Setting the order yourself, however obvious it looks,
+takes a decision that is not the BA's and removes the one person accountable for it.
 
 ## Epics that hold together
 
@@ -41,12 +43,15 @@ Below the story, the acceptance criteria. Above it, the link to the objective. B
 release. That is the whole unit: it should be readable on its own, because that is how it will
 be read.
 
-## Out of scope is a section, not a footnote
+## Out of scope, written down by you, decided by the PO
 
-Write what is **not** included as deliberately as what is. The exclusions section is the one the
-customer reads at delivery, and everything not written there is arguable. Name the things people
-will assume are included: other channels, other roles, migration of old data, reports beyond the
-listed ones, languages, environments, support after go-live.
+The boundary is the PO's call (`delivery-po`, `references/scope-and-mvp.md`). Writing it down
+precisely enough to hold is yours - a boundary everyone agreed to in a meeting and nobody wrote
+is not a boundary.
+
+Name the things people will assume are included: other channels, other roles, migration of old
+data, reports beyond the listed ones, languages, environments, support after go-live. Where
+analysis turns up something the PO has not ruled on, ask rather than deciding.
 
 ## Every requirement needs a trail
 
