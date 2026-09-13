@@ -1,31 +1,29 @@
-# codefin-skills
+# delivery-skills
 
-Skills for Claude Code and other agents, from Codefin.
+Skills for Claude Code and other agents: how software gets agreed, built and proved, plus one
+that gets a repository ready for them.
 
-Skills covering how software gets agreed, built and proved, plus one that gets a repository
-ready for them. They are written as **general standards**, not as a record of any one project, so
-they are useful outside the company that wrote them. That is why this is public: take what is
-useful.
+They describe **one opinionated process**, written so that anyone can run it. The opinions are
+real and load-bearing - they came from delivering software to customers, not from a textbook -
+but nothing in them is tied to the company that wrote them. Take what is useful.
 
-Codefin's document and brand house style is a separate, private package.
+## What the process assumes
 
-## If you are not at Codefin
-
-Take them anyway - but know which parts are ours rather than universal, because the skills say so
-out loud rather than pretending otherwise:
+Three assumptions are stated out loud in the skills rather than hidden, because your team may be
+arranged differently:
 
 - **the BA is also the product owner**, so one person holds both what was agreed and what it is
-  worth. Where those are two people at your place, the handoffs gain a seam.
+  worth. Where those are two people, the handoffs gain a seam.
 - **QA writes the automation**, rather than specifying cases for developers to automate.
-- **the BRD (or FSD - clients use both names for one document) is the agreement**, and everything
-  carries its requirement identifier.
+- **the BRD - some customers call the same document an FSD - is the agreement**, and everything
+  downstream carries its requirement identifier.
 
-Substitute your own arrangement where these differ; nothing else in the skills depends on them.
-Everything about repositories, tests, defects and gates applies as written.
+Substitute your own arrangement where these differ. Nothing else depends on them: everything
+about repositories, tests, defects and gates applies as written.
 
-The checks in `scripts/` are for this repository's own safety. If you fork and they flag
-something of yours - your real ticket keys, say - add the prefix to `.leakallow` rather than
-removing the check.
+The checks in `scripts/` guard this repository, not yours. If you fork and one flags something of
+your own - your real ticket keys, say - add the prefix to `.leakallow` rather than removing the
+check.
 
 ## What these are for
 
@@ -42,16 +40,16 @@ call an acceptance criterion finished when nobody could check it.
 ## The skills
 
 Three follow the delivery chain, handing off through the same two identifiers. A fourth,
-`codefin-setup`, runs once at the start and then never again.
+`delivery-setup`, runs once at the start and then never again.
 
 ```
-codefin-ba        what we agreed to build
+delivery-ba        what we agreed to build
    │  US-3.4 and its acceptance criteria
    ▼
-codefin-qa        how it gets proved
+delivery-qa        how it gets proved
    │  TS-900 citing US-3.4
    ▼
-codefin-dev       how it gets built and repaired
+delivery-dev       how it gets built and repaired
       code, tests and defects, each naming the promise it is about
 ```
 
@@ -61,7 +59,7 @@ everything else is in service of it.
 
 ---
 
-### `codefin-ba` — what we agreed to build
+### `delivery-ba` — what we agreed to build
 
 Fires when you are eliciting requirements, writing or amending a BRD, writing acceptance
 criteria, drawing the scope line, sizing a feature list, or judging whether a customer's
@@ -80,12 +78,12 @@ changes, never after.
 | `sizing.md` | feature lists, estimating without fooling yourself, why man-days stay internal |
 | `modelling.md` | what deserves a diagram, and the access matrix everyone forgets |
 
-Ships `/codefin-ba:requirements`, `check-requirements.sh`, and templates for a requirement, a
+Ships `/delivery-ba:requirements`, `check-requirements.sh`, and templates for a requirement, a
 question set and a change request.
 
 ---
 
-### `codefin-qa` — whether it has been proved
+### `delivery-qa` — whether it has been proved
 
 Fires when you are designing scenarios from acceptance criteria, maintaining the register,
 writing automation, planning or running a round, exploring, or taking a customer through UAT.
@@ -102,12 +100,12 @@ QA decides one question, and it is not whether the system is good: **has the cla
 | `uat.md` | UAT as a rehearsal, not a discovery |
 | `reporting-defects.md` | writing a defect that does not bounce |
 
-Ships `/codefin-qa:round`, `trace-gaps.sh`, and templates for a round report, an exploratory
+Ships `/delivery-qa:round`, `trace-gaps.sh`, and templates for a round report, an exploratory
 charter, a UAT walkthrough and a testability-gap list.
 
 ---
 
-### `codefin-dev` — how it gets built and repaired
+### `delivery-dev` — how it gets built and repaired
 
 Fires when you are writing, reviewing or releasing code, investigating a defect, or deciding
 commit messages, branch names, repository layout or review gates.
@@ -127,12 +125,12 @@ answer of its own.
 | `conventions.md` | house defaults for a greenfield project |
 | `stacks.md` | the only file that names specific tools |
 
-Ships `/codefin-dev:defect`, `blast-radius.sh`, and templates for tests in three languages, CI
+Ships `/delivery-dev:defect`, `blast-radius.sh`, and templates for tests in three languages, CI
 workflows, an ADR, a defect record and the handoff checklists.
 
 ---
 
-### `codefin-setup` — getting a repository ready
+### `delivery-setup` — getting a repository ready
 
 Run once per repository, by hand. It creates the furniture that is missing — `CONTEXT.md`, a
 first ADR, `.env.example`, the four test targets and a pull request gate — and records the few
@@ -185,20 +183,20 @@ name - you describe the task.
 | "plan the next SIT round" | entry criteria checked, selection by risk, exclusions written down, report with the tally |
 | "the customer says the export is wrong" | it is classified as a defect or a CR against the document before anyone starts fixing |
 
-`codefin-setup` is the exception: it never fires on its own, because a repository is set up
+`delivery-setup` is the exception: it never fires on its own, because a repository is set up
 deliberately or not at all. Ask for it by name the first time you bring these skills to a project.
 
 The slash commands are for when you want the whole procedure driven end to end:
 
 ```
-/codefin-ba:requirements  docs/BRD.docx
-/codefin-qa:round         round 3, build 1.4.2
-/codefin-dev:defect       customer reports the balance rounds down on the statement
+/delivery-ba:requirements  docs/BRD.docx
+/delivery-qa:round         round 3, build 1.4.2
+/delivery-dev:defect       customer reports the balance rounds down on the statement
 ```
 
 ### A worked pass through the chain
 
-0. **Once per repository**, `codefin-setup` creates what is missing and asks only about what the
+0. **Once per repository**, `delivery-setup` creates what is missing and asks only about what the
    files could not have told it.
 1. **The BA** writes `US-3.4` with acceptance criteria, runs `check-requirements.sh` over the
    copy the customer actually holds, and sends back anything nobody could check.
@@ -221,19 +219,19 @@ Two routes. They read the same files, so a skill is written once.
 ### As a plugin — the full thing
 
 ```bash
-claude plugin marketplace add codefin-lab/codefin-skills
-claude plugin install codefin-ba@codefin-skills
-claude plugin install codefin-dev@codefin-skills
-claude plugin install codefin-qa@codefin-skills
+claude plugin marketplace add codefin-lab/delivery-skills
+claude plugin install delivery-ba@delivery-skills
+claude plugin install delivery-dev@delivery-skills
+claude plugin install delivery-qa@delivery-skills
 ```
 
 Claude Code only. Brings the skills **and** the slash commands, and updates with
-`claude plugin marketplace update codefin-skills`.
+`claude plugin marketplace update delivery-skills`.
 
 ### With `npx skills` — the skills on their own
 
 ```bash
-npx skills add codefin-lab/codefin-skills --skill '*'
+npx skills add codefin-lab/delivery-skills --skill '*'
 ```
 
 Works for other agents too, and installs into the project at `.claude/skills/<name>/` (add `-g`
@@ -249,8 +247,8 @@ fewer shortcut - no command is ever the only route to a procedure.
 Point either route at a checkout:
 
 ```bash
-claude plugin marketplace add ./codefin-skills
-npx skills add ./codefin-skills --skill codefin-dev --copy
+claude plugin marketplace add ./delivery-skills
+npx skills add ./delivery-skills --skill delivery-dev --copy
 ```
 
 ### Optional dependencies

@@ -74,4 +74,4 @@ jobs:
           # noise; the structure is what has to be valid.
           ./actionlint -shellcheck= \
             .github/workflows/*.yml \
-            plugins/codefin-dev/skills/codefin-dev/templates/workflow-*.yml
+            plugins/delivery-dev/skills/delivery-dev/templates/workflow-*.yml

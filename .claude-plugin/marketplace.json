@@ -1,26 +1,26 @@
 {
-  "name": "codefin-skills",
+  "name": "delivery-skills",
   "owner": {
     "name": "Codefin Company Limited",
     "url": "https://github.com/codefin-lab"
   },
   "metadata": {
-    "description": "Skills from Codefin - how the company works, written as general standards and packaged so every team and every agent works the same way."
+    "description": "One opinionated process for delivering software - what was agreed, how it is built, and whether it has been proved - packaged so every team and every agent works the same way."
   },
   "plugins": [
     {
-      "name": "codefin-dev",
-      "source": "./plugins/codefin-dev",
-      "description": "How Codefin builds software: the three test layers run as gates without being asked, the defect procedure that keeps a fix closed, and the handoffs that keep PO, QA and Dev on one document."
+      "name": "delivery-dev",
+      "source": "./plugins/delivery-dev",
+      "description": "How software gets built and repaired: the three test layers run as gates without being asked, the defect procedure that keeps a fix closed, and the handoffs that keep the BA, QA and Dev on one document."
     },
     {
-      "name": "codefin-ba",
-      "source": "./plugins/codefin-ba",
+      "name": "delivery-ba",
+      "source": "./plugins/delivery-ba",
       "description": "Business analysis: turning what a customer says into requirements that can be built and acceptance criteria that can be proved, sized honestly, with the scope line held."
     },
     {
-      "name": "codefin-qa",
-      "source": "./plugins/codefin-qa",
+      "name": "delivery-qa",
+      "source": "./plugins/delivery-qa",
       "description": "Quality assurance: deriving scenarios from acceptance criteria, keeping coverage honest, running a round, and proving it to the customer at UAT."
     }
   ]
