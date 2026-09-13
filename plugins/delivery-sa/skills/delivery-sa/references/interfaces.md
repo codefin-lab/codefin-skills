@@ -7,8 +7,12 @@ service reads, a shared library's public surface, an event on a queue, a file fo
 it is somebody else's incident.
 
 This is not a reason to freeze. It is a reason to know **who depends on it before you change
-it**, which is a procedure and a tool in `delivery-dev`, `references/defects.md` (the blast
-radius step). Use it at design time, not only when fixing something.
+it**. Ask the language server for references rather than grepping a name, search every
+repository that could import it rather than only this one, and watch for **copies as well as
+uses** - a vendored duplicate will not receive your change and will drift.
+
+Do this at design time, not only when fixing something. The `delivery-dev` skill has the fuller
+procedure and a script, if you have it installed.
 
 ## Design the interface before the implementation
 

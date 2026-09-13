@@ -29,8 +29,10 @@ Architecture does not care who is paying.
   BA's requirement; which mechanism, at what cost, with what failure behaviour, is yours, and it
   is testable or it is not real.
 - **Anything you publish is a contract.** A schema, an API, a shared library's surface, an event
-  - the moment something else depends on it, changing it is somebody else's incident.
-  `delivery-dev` has the procedure for finding out who.
+  - the moment something else depends on it, changing it is somebody else's incident. Find out
+  who depends on it **before** the change, not after: language-server references rather than a
+  grep, across every repository that could import it, watching for copies as well as uses. The
+  `delivery-dev` skill has a fuller procedure and a script for it if you have it installed.
 - **Build the risky part first.** Until a real call has been made to a real endpoint, an
   integration estimate is fiction, and so is the plan that rests on it.
 - **Prefer the boring thing.** Novelty is a cost paid by everyone who maintains it, usually
@@ -51,8 +53,10 @@ into a set of mechanisms with owners.
 
 ## Shared with the other skills
 
+This skill works on its own. Where it points at another, that is for more depth, not because
+something essential is missing here.
+
 The six roles and who decides what are defined once, in the `delivery-dev` skill under
 `references/workflow.md`. Requirements including non-functional ones come from the BA
-(`delivery-ba`) - they say what must be true, you say how. Where knowledge lives, and the rule
-that ADRs sit in the repository so a pull request can catch them going stale, is in
-`delivery-dev` under `references/knowledge.md`.
+(`delivery-ba`) - they say what must be true, you say how. The reasoning behind keeping records
+in the repository rather than a wiki is in `delivery-dev`, `references/knowledge.md`.

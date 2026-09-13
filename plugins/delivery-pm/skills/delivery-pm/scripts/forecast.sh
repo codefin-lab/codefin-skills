@@ -146,18 +146,40 @@ for i in items:
     if ACCEPTED.match(i['status']) and (i['spent'] or 0) == 0:
         problems.append((i['name'], "accepted with no days recorded"))
 
+# The rate is what accepted work actually cost against what it was estimated at. Dividing
+# total spend by accepted estimate instead sweeps days spent on unfinished work into the
+# rate and inflates it wildly - on a real list that read 264% where the truth was 143%,
+# which is the difference between a steering report that informs and one that alarms.
+spent_done = sum(i['spent'] or 0 for i in accepted)
+spent_wip  = spent_total - spent_done
+
 if est_done == 0:
     print("\n  No feature is accepted yet, so there is no observed rate to forecast from.")
     print("  Spend so far tells you nothing about the finish until something is accepted -")
     print("  which is the reason to get one thing all the way through early.")
 else:
-    observed = spent_total / est_done
-    forecast = spent_total + est_left * observed
+    observed = spent_done / est_done
+    # Accepted work costs what it cost. Everything else is forecast at the observed rate, but
+    # never below what it has already consumed - a forecast lower than the money already spent
+    # is a number nobody can defend, and an item that has blown past its estimate does not get
+    # cheaper by being unfinished.
+    def item_forecast(i):
+        return max((i['est'] or 0) * observed, i['spent'] or 0)
+    forecast = spent_done + sum(item_forecast(i) for i in items if not ACCEPTED.match(i['status']))
     over = forecast - est_total
-    print(f"\n  observed rate {observed:.2f}x  ({spent_total:g} days spent for {est_done:g} days of accepted work)")
+    print(f"\n  observed rate {observed:.2f}x  ({spent_done:g} days spent on work estimated at {est_done:g})")
+    if spent_wip:
+        print(f"  in progress   {spent_wip:g} days already spent on work not yet accepted")
     print(f"  remaining     {est_left:g} estimated days, {est_left * observed:.1f} at the observed rate")
     print(f"  forecast      {forecast:.1f} days against an estimate of {est_total:g}"
           f"  ({'+' if over >= 0 else ''}{over:.1f}, {forecast / est_total * 100:.0f}%)")
+    # An unfinished item that has already outrun its forecast is worth naming on its own.
+    burnt = [i for i in items if not ACCEPTED.match(i['status']) and i['est']
+             and (i['spent'] or 0) > i['est'] * observed]
+    if burnt:
+        print(f"\n  already past their forecast before being accepted:")
+        for i in burnt:
+            print(f"    {i['name'][:44]:<46} {i['spent']:g} spent, {i['est'] * observed:.1f} forecast")
     if rate:
         try:
             per_week = float(rate)

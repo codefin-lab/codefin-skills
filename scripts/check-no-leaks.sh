@@ -61,7 +61,7 @@ rules() {
 # fork adds. A fork tracking real work in this repository will have its own ticket keys, and
 # they are not leaks - $LEAK_ALLOW or a .leakallow file (one extended regex per line) says so.
 allowlist() {
-  local base='ABC-123|DEF-118|TS-9[0-9][0-9]|WCAG-|UTF-|RFC-|ISO-|SHA-|AES-|CIS-|MIT-'
+  local base='ABC-123|DEF-118|TS-9[0-9][0-9]|ADR-|WCAG-|UTF-|RFC-|ISO-|SHA-|AES-|CIS-|MIT-'
   local extra=""
   [ -n "${LEAK_ALLOW:-}" ] && extra=$(printf '%s' "$LEAK_ALLOW" | tr '\n' '|')
   [ -z "$extra" ] && [ -f .leakallow ] && extra=$(grep -vE '^\s*(#|$)' .leakallow | tr '\n' '|')

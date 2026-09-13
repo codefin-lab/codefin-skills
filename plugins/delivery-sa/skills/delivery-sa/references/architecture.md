@@ -23,9 +23,29 @@ Not every choice. An ADR is warranted when:
 The test in practice: **would somebody new ask "why on earth is it like this?"** If yes, answer
 them now, in a page, rather than in a meeting every six months.
 
-`templates/adr-template.md` has the shape. Keep them in the repository - `docs/adr/` - so a pull
-request can catch one going stale, which is the reasoning in `delivery-dev`,
-`references/knowledge.md`.
+`templates/adr-template.md` has the shape.
+
+## Where an ADR lives
+
+Keep it where a pull request will pass over it, so it cannot go stale unnoticed. For a decision
+inside one codebase that means `docs/adr/` in that repository, numbered in sequence.
+
+Architecture decisions frequently are not inside one codebase, which is this role's particular
+problem:
+
+- **A decision spanning several repositories** goes in the one that owns the thing being decided
+  - the service that publishes the interface, the repository that holds the shared library - and
+  the others link to it. Copying it into each guarantees the copies diverge, and then nobody can
+  tell which is current.
+- **A decision that precedes any repository** - the platform shape, the integration approach -
+  goes wherever the project's documents live for now, **with a note of where it will move**, and
+  it moves when the repository exists. An ADR nobody can find is an ADR nobody wrote.
+- **A decision about someone else's system** is not an ADR, it is an agreement. Record what was
+  agreed and with whom, in a document both sides have seen
+  (`references/integration.md`).
+
+Number them per home, not globally. Two repositories both having an `ADR-0003` is fine and
+expected; what is not fine is one number meaning two things in the same place.
 
 ## Name the trade
 

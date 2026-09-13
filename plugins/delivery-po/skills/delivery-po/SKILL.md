@@ -47,6 +47,9 @@ changing their mind.
 
 ## Shared with the other skills
 
+This skill works on its own. Where it points at another, that is for more depth, not because
+something essential is missing here.
+
 The six roles and who decides what are defined once, in the `delivery-dev` skill under
 `references/workflow.md`. Requirements and acceptance criteria are written by the BA
 (`delivery-ba`) from what you decide is worth building - you own the *why* and the *order*, the
