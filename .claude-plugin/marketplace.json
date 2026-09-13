@@ -22,6 +22,11 @@
       "name": "delivery-qa",
       "source": "./plugins/delivery-qa",
       "description": "Quality assurance: deriving scenarios from acceptance criteria, keeping coverage honest, running a round, and proving it to the customer at UAT."
+    },
+    {
+      "name": "delivery-pm",
+      "source": "./plugins/delivery-pm",
+      "description": "Running the project: the plan, the money, the risks and the steering report - assembled from what the other three produce, so the numbers reported are the numbers that happened."
     }
   ]
 }

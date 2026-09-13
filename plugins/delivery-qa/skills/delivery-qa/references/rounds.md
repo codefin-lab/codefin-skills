@@ -69,8 +69,9 @@ Agree them before the round, not after the results are in. Typically: no P0 open
 fixed or accepted in writing with a named owner, every selected scenario has a result, and the
 regression set passed.
 
-**Exit is a recommendation, not a decision.** QA says whether it is proved; the business decides
+**Exit is a recommendation, not a decision.** QA says whether it is proved; the PM decides
 whether to ship. Both are legitimate - what is not legitimate is QA implying it is proved
-because a date is close.
+because a date is close, or a ship decision going unrecorded. Where one is taken against QA's
+recommendation, what is being accepted is written down (`delivery-pm`).
 
 `templates/round-report.md` has the shape.

@@ -46,6 +46,16 @@ who provides test data, the customer's review turnaround, how many rounds of UAT
 which integrations are ready. Each of these has ended a project's schedule at some point, and
 each is outside our control - which is exactly why it belongs next to the figure it affects.
 
+## Where this hands over
+
+The estimate is the BA's: what a feature costs is a judgement about the work. **The budget it
+implies belongs to the PM**, who tracks what is actually spent against it, forecasts the finish
+from the rate observed rather than the rate hoped for, and decides what gets cut
+(`delivery-pm`).
+
+Disagreement about an estimate is settled here, not silently padded in the plan - padding hides
+the disagreement and destroys the only baseline anyone had.
+
 ## Re-estimating is not failure
 
 When scope changes or an assumption fails, re-estimate and say so at the time. An estimate

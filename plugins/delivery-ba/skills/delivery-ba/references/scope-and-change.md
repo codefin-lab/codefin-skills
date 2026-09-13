@@ -48,6 +48,10 @@ CR" is the beginning of a response, not the whole of it.
 5. **Get it agreed in writing** before it is built. A CR built on a verbal yes is unbilled work
    that also broke the scope line for every future CR.
 
+Priced and agreed, a CR is then tracked as both revenue and schedule by the PM. The second half
+is the one that gets forgotten, and then a project is inexplicably late while the invoices look
+healthy.
+
 ## When scope creeps without a CR
 
 It rarely arrives as a request. It arrives as "while you're in there", as a screenshot in a

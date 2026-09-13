@@ -84,8 +84,11 @@ Most stand-offs dissolve once this is said out loud.
 | is this what the customer agreed to, and is it worth doing | BA |
 | has it been proven, and is the evidence good enough | QA |
 | how it is built or repaired | Dev |
+| when, at what cost, and what gets cut | PM |
 
 QA does not decide whether a behaviour is desirable; they decide whether the claim is proven.
+The PM does not decide whether something is proved - but does decide whether to ship anyway,
+which is a legitimate call and a recorded one (`delivery-pm`).
 The BA does not decide how a thing is implemented. Dev does not decide that an AC is
 unimportant.
 When the answer is genuinely contested, it goes back to the document, and the document is

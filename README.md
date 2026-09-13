@@ -1,7 +1,7 @@
 # delivery-skills
 
-Skills for Claude Code and other agents: how software gets agreed, built and proved, plus one
-that gets a repository ready for them.
+Skills for Claude Code and other agents: how software gets agreed, built, proved and managed,
+plus one that gets a repository ready for them.
 
 They describe **one opinionated process**, written so that anyone can run it. The opinions are
 real and load-bearing - they came from delivering software to customers, not from a textbook -
@@ -15,6 +15,8 @@ arranged differently:
 - **the BA is also the product owner**, so one person holds both what was agreed and what it is
   worth. Where those are two people, the handoffs gain a seam.
 - **QA writes the automation**, rather than specifying cases for developers to automate.
+- **the BA estimates and the PM owns the budget** that estimate implies - the PM watches cost and
+  timeline rather than judging requirements.
 - **the BRD - some customers call the same document an FSD - is the agreement**, and everything
   downstream carries its requirement identifier.
 
@@ -51,6 +53,9 @@ delivery-qa        how it gets proved
    ▼
 delivery-dev       how it gets built and repaired
       code, tests and defects, each naming the promise it is about
+
+delivery-pm        when, at what cost, and what gets cut
+      the arithmetic on all three, reported to whoever is paying
 ```
 
 A failing test names the clause of the agreement that is now untrue. A customer's complaint can
@@ -130,6 +135,28 @@ workflows, an ADR, a defect record and the handoff checklists.
 
 ---
 
+### `delivery-pm` — when, at what cost, and what gets cut
+
+Fires when you are planning or replanning, tracking spend against the estimate, forecasting a
+finish, keeping the risk register live, preparing a steering report, or deciding whether to ship.
+
+It owns none of the content: not what the system should do, and not whether it works. The job is
+arithmetic on other people's output, done honestly and early — the forecast recalculated from
+what happened rather than from what was planned, and bad news travelling the week it becomes
+likely rather than at the deadline.
+
+| Reference | Covers |
+| :-- | :-- |
+| `plan.md` | milestones you can show, sequencing by risk, dependencies you do not control, replanning without hiding it |
+| `cost.md` | the two numbers that only mean something together, what eats a budget, forecasting at the rate observed |
+| `risk.md` | entries with a consequence in days and an owner who is a person, and what actually goes wrong on client projects |
+| `steering.md` | where each number comes from, saying the bad thing first, asking for decisions rather than narrating |
+
+Ships `/delivery-pm:steering`, `forecast.sh`, and templates for a steering report and a risk
+register.
+
+---
+
 ### `delivery-setup` — getting a repository ready
 
 Run once per repository, by hand. It creates the furniture that is missing — `CONTEXT.md`, a
@@ -155,6 +182,7 @@ skipping it is what later goes wrong. So each skill ships a script for exactly t
 | `check-requirements.sh` | which requirements could not actually be proved | md, docx, pdf, xlsx, csv |
 | `trace-gaps.sh` | where the chain from requirement to proof is broken | md, docx, pdf, xlsx, csv |
 | `blast-radius.sh` | what else depends on the code about to change | a repo, sibling clones, a GitHub org |
+| `forecast.sh` | what this will have cost at the rate it is actually going | md, docx, pdf, xlsx, csv |
 
 Each says plainly what it cannot see, so it is not mistaken for the review itself. None of them
 rewrites anything.
@@ -168,6 +196,9 @@ trace-gaps.sh --register register.xlsx --requirements docs/BRD.pdf --suite tests
 
 # before editing anything shared
 blast-radius.sh PaginationOptions -C /path/to/repo -o my-org
+
+# before writing a steering report
+forecast.sh features.xlsx --rate 5
 ```
 
 ## Using them
@@ -192,6 +223,7 @@ The slash commands are for when you want the whole procedure driven end to end:
 /delivery-ba:requirements  docs/BRD.docx
 /delivery-qa:round         round 3, build 1.4.2
 /delivery-dev:defect       customer reports the balance rounds down on the statement
+/delivery-pm:steering      march report, features.xlsx
 ```
 
 ### A worked pass through the chain
@@ -223,6 +255,7 @@ claude plugin marketplace add codefin-lab/delivery-skills
 claude plugin install delivery-ba@delivery-skills
 claude plugin install delivery-dev@delivery-skills
 claude plugin install delivery-qa@delivery-skills
+claude plugin install delivery-pm@delivery-skills
 ```
 
 Claude Code only. Brings the skills **and** the slash commands, and updates with
