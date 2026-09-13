@@ -1,0 +1,69 @@
+<svg viewBox="0 0 1584 624" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="roles-title roles-desc">
+<title id="roles-title">Six roles and what passes between them</title>
+<desc id="roles-desc">A chain from product owner to business analyst, solution architect, developer and QA, with defects and acceptance returning, and dotted lines showing what the project manager reads from each in order to forecast.</desc>
+<defs>
+<marker id="a" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4a5568"/></marker>
+<marker id="ad" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#6b7280"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<line x1="244" y1="158" x2="380" y2="158" stroke="#4a5568" stroke-width="1.2" marker-end="url(#a)"/>
+<line x1="564" y1="158" x2="700" y2="158" stroke="#4a5568" stroke-width="1.2" marker-end="url(#a)"/>
+<line x1="884" y1="158" x2="1020" y2="158" stroke="#4a5568" stroke-width="1.2" marker-end="url(#a)"/>
+<line x1="1204" y1="158" x2="1340" y2="158" stroke="#4a5568" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M 1420,196 V 252 Q 1420,260 1412,260 H 1096 Q 1088,260 1088,252 V 196" fill="none" stroke="#4a5568" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M 1432,120 V 64 Q 1432,56 1424,56 H 160 Q 152,56 152,64 V 120" fill="none" stroke="#4a5568" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M 472,196 V 436 Q 472,444 480,444 H 700" stroke="#6b7280" stroke-width="1.1" stroke-dasharray="4,3" fill="none" marker-end="url(#ad)"/>
+<path d="M 1136,196 V 254 A 6,6 0 0,1 1136,266 V 436 Q 1136,444 1128,444 H 884" stroke="#6b7280" stroke-width="1.1" stroke-dasharray="4,3" fill="none" marker-end="url(#ad)"/>
+<path d="M 1444,196 V 460 Q 1444,468 1436,468 H 884" stroke="#6b7280" stroke-width="1.1" stroke-dasharray="4,3" fill="none" marker-end="url(#ad)"/>
+<path d="M 700,468 H 160 Q 152,468 152,460 V 196" stroke="#6b7280" stroke-width="1.1" stroke-dasharray="4,3" fill="none" marker-end="url(#ad)"/>
+<rect x="268" y="138" width="88" height="12" rx="2" fill="#ffffff"/><text x="312" y="147" fill="#6b7280" font-size="8" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.06em">SCOPE + ORDER</text>
+<rect x="594" y="138" width="76" height="12" rx="2" fill="#ffffff"/><text x="632" y="147" fill="#6b7280" font-size="8" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.06em">US-3.4 + AC</text>
+<rect x="910" y="138" width="84" height="12" rx="2" fill="#ffffff"/><text x="952" y="147" fill="#6b7280" font-size="8" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.06em">SHAPE + ADRS</text>
+<rect x="1244" y="138" width="56" height="12" rx="2" fill="#ffffff"/><text x="1272" y="147" fill="#6b7280" font-size="8" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.06em">A BUILD</text>
+<rect x="1226" y="240" width="56" height="12" rx="2" fill="#ffffff"/><text x="1254" y="249" fill="#6b7280" font-size="8" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.06em">DEFECTS</text>
+<rect x="764" y="36" width="56" height="12" rx="2" fill="#ffffff"/><text x="792" y="45" fill="#6b7280" font-size="8" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.06em">PROVED?</text>
+<rect x="484" y="306" width="72" height="12" rx="2" fill="#ffffff"/><text x="520" y="315" fill="#6b7280" font-size="8" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.06em">ROUGH SIZE</text>
+<rect x="1148" y="334" width="60" height="12" rx="2" fill="#ffffff"/><text x="1178" y="343" fill="#6b7280" font-size="8" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.06em">ESTIMATE</text>
+<rect x="1344" y="330" width="88" height="12" rx="2" fill="#ffffff"/><text x="1388" y="339" fill="#6b7280" font-size="8" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.06em">ROUND NUMBERS</text>
+<rect x="396" y="476" width="60" height="12" rx="2" fill="#ffffff"/><text x="426" y="485" fill="#6b7280" font-size="8" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.06em">FORECAST</text>
+<rect x="60" y="120" width="184" height="76" rx="6" fill="#ffffff"/>
+<rect x="60" y="120" width="184" height="76" rx="6" fill="#1a202c" stroke="#1a202c" stroke-width="1"/>
+<rect x="68" y="128" width="32" height="12" rx="2" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="0.8"/>
+<text x="84" y="137" fill="#ffffff" fill-opacity="0.85" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.08em">PO</text>
+<text x="152" y="164" fill="#ffffff" font-size="12" font-weight="600" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">worth doing,</text>
+<text x="152" y="180" fill="#ffffff" font-size="12" font-weight="400" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">in what order</text>
+<rect x="380" y="120" width="184" height="76" rx="6" fill="#ffffff"/>
+<rect x="380" y="120" width="184" height="76" rx="6" fill="#ffffff" stroke="#1a202c" stroke-width="1"/>
+<rect x="388" y="128" width="32" height="12" rx="2" fill="none" stroke="#1a202c" stroke-opacity="0.45" stroke-width="0.8"/>
+<text x="404" y="137" fill="#1a202c" fill-opacity="0.85" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.08em">BA</text>
+<text x="472" y="164" fill="#1a202c" font-size="12" font-weight="600" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">what exactly, and</text>
+<text x="472" y="180" fill="#6b7280" font-size="12" font-weight="400" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">how to check it</text>
+<rect x="700" y="120" width="184" height="76" rx="6" fill="#ffffff"/>
+<rect x="700" y="120" width="184" height="76" rx="6" fill="#ffffff" stroke="#1a202c" stroke-width="1"/>
+<rect x="708" y="128" width="32" height="12" rx="2" fill="none" stroke="#1a202c" stroke-opacity="0.45" stroke-width="0.8"/>
+<text x="724" y="137" fill="#1a202c" fill-opacity="0.85" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.08em">SA</text>
+<text x="792" y="164" fill="#1a202c" font-size="12" font-weight="600" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">what it is</text>
+<text x="792" y="180" fill="#6b7280" font-size="12" font-weight="400" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">built out of</text>
+<rect x="1020" y="120" width="184" height="76" rx="6" fill="#ffffff"/>
+<rect x="1020" y="120" width="184" height="76" rx="6" fill="#ffffff" stroke="#1a202c" stroke-width="1"/>
+<rect x="1028" y="128" width="32" height="12" rx="2" fill="none" stroke="#1a202c" stroke-opacity="0.45" stroke-width="0.8"/>
+<text x="1044" y="137" fill="#1a202c" fill-opacity="0.85" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.08em">DEV</text>
+<text x="1112" y="164" fill="#1a202c" font-size="12" font-weight="600" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">build it,</text>
+<text x="1112" y="180" fill="#6b7280" font-size="12" font-weight="400" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">and repair it</text>
+<rect x="1340" y="120" width="184" height="76" rx="6" fill="#ffffff"/>
+<rect x="1340" y="120" width="184" height="76" rx="6" fill="#ffffff" stroke="#1a202c" stroke-width="1"/>
+<rect x="1348" y="128" width="32" height="12" rx="2" fill="none" stroke="#1a202c" stroke-opacity="0.45" stroke-width="0.8"/>
+<text x="1364" y="137" fill="#1a202c" fill-opacity="0.85" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.08em">QA</text>
+<text x="1432" y="164" fill="#1a202c" font-size="12" font-weight="600" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">has it been</text>
+<text x="1432" y="180" fill="#6b7280" font-size="12" font-weight="400" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">proved</text>
+<rect x="700" y="420" width="184" height="76" rx="6" fill="#ffffff"/>
+<rect x="700" y="420" width="184" height="76" rx="6" fill="rgba(26,32,44,0.05)" stroke="#4a5568" stroke-width="1"/>
+<rect x="708" y="428" width="32" height="12" rx="2" fill="none" stroke="#4a5568" stroke-opacity="0.45" stroke-width="0.8"/>
+<text x="724" y="437" fill="#1a202c" fill-opacity="0.85" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.08em">PM</text>
+<text x="792" y="464" fill="#1a202c" font-size="12" font-weight="600" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">when, at what cost,</text>
+<text x="792" y="480" fill="#6b7280" font-size="12" font-weight="400" font-family="'Anuphan','Sarabun',sans-serif" text-anchor="middle">what gets cut</text>
+<line x1="666" y1="568" x2="686" y2="568" stroke="#4a5568" stroke-width="1.2"/>
+<text x="694" y="571" fill="#6b7280" font-size="9" font-family="'Anuphan','Sarabun',sans-serif">the work moving</text>
+<line x1="799" y1="568" x2="819" y2="568" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="827" y="571" fill="#6b7280" font-size="9" font-family="'Anuphan','Sarabun',sans-serif">what the PM reads</text>
+</svg>

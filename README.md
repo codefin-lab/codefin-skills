@@ -72,28 +72,7 @@ again.
 
 The sections below follow the order work moves through them.
 
-```mermaid
-flowchart TD
-    PO["PO<br/>worth doing, in what order"]
-    BA["BA<br/>what exactly, and how to check it"]
-    SA["SA<br/>what it is built out of"]
-    DEV["Dev<br/>build it, and repair it"]
-    QA["QA<br/>has it been proved"]
-    PM["PM<br/>when, at what cost, what gets cut"]
-
-    PO -->|scope and order| BA
-    BA -->|US-3.4 and its acceptance criteria| SA
-    SA -->|the shape, ADRs, how each NFR is met| DEV
-    DEV -->|a build on an environment| QA
-    QA -->|defects, each citing the US it violates| DEV
-    QA -->|proved, or not| PO
-
-    BA -.->|the same criteria| QA
-    BA -.->|rough size| PM
-    DEV -.->|detailed estimate| PM
-    QA -.->|round numbers| PM
-    PM -.->|forecast, and what gets cut| PO
-```
+![Six roles and what passes between them](docs/diagrams/roles.png)
 
 Solid lines are the work moving. Dotted ones are what the PM needs in order to say when and at
 what cost - the role reads from everyone and decides for nobody.
@@ -103,17 +82,7 @@ what cost - the role reads from everyone and decides for nobody.
 Two identifiers, and they carry each other. The BA numbers what was agreed; QA numbers how it
 gets proved.
 
-```mermaid
-flowchart LR
-    US["US-3.4<br/>the agreement, and its acceptance criteria"]
-    TS["TS-901<br/>the scenario QA derives to prove it"]
-    C["test cases<br/>named for TS-901, citing US-3.4"]
-    D["DEF-902<br/>cites the US it violates"]
-    R["regression test<br/>named for both"]
-
-    US --> TS --> C
-    US --> D --> R
-```
+![Two identifiers, carrying each other](docs/diagrams/identifiers.png)
 
 A failing test names the clause of the agreement that is now untrue. A customer's complaint can
 be traced to the case that should have caught it. A requirement with no scenario has nobody
