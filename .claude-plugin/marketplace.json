@@ -1,5 +1,5 @@
 {
-  "name": "delivery-skills",
+  "name": "cf-skills",
   "owner": {
     "name": "Codefin Company Limited",
     "url": "https://github.com/codefin-lab"
@@ -9,33 +9,33 @@
   },
   "plugins": [
     {
-      "name": "delivery-dev",
-      "source": "./plugins/delivery-dev",
+      "name": "cf-dev",
+      "source": "./plugins/cf-dev",
       "description": "How software gets built and repaired: the three test layers run as gates without being asked, the defect procedure that keeps a fix closed, and the handoffs that keep the BA, QA and Dev on one document."
     },
     {
-      "name": "delivery-ba",
-      "source": "./plugins/delivery-ba",
+      "name": "cf-ba",
+      "source": "./plugins/cf-ba",
       "description": "Business analysis: turning what a customer says into requirements that can be built and acceptance criteria that can be proved, sized honestly, with the scope line held."
     },
     {
-      "name": "delivery-qa",
-      "source": "./plugins/delivery-qa",
+      "name": "cf-qa",
+      "source": "./plugins/cf-qa",
       "description": "Quality assurance: deriving scenarios from acceptance criteria, keeping coverage honest, running a round, and proving it to the customer at UAT."
     },
     {
-      "name": "delivery-pm",
-      "source": "./plugins/delivery-pm",
+      "name": "cf-pm",
+      "source": "./plugins/cf-pm",
       "description": "Running the project: the plan, the money, the risks and the steering report - assembled from what the other three produce, so the numbers reported are the numbers that happened."
     },
     {
-      "name": "delivery-po",
-      "source": "./plugins/delivery-po",
+      "name": "cf-po",
+      "source": "./plugins/cf-po",
       "description": "Owning the product or the scope: goal and value, what is in and out, what order, what the minimum is, and whether the result is accepted."
     },
     {
-      "name": "delivery-sa",
-      "source": "./plugins/delivery-sa",
+      "name": "cf-sa",
+      "source": "./plugins/cf-sa",
       "description": "Solution architecture: the shape it is built in, the interfaces it publishes, how the non-functional requirements are actually met, and the trade-offs behind each - written down where the next person will meet them."
     }
   ]

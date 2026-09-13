@@ -11,7 +11,7 @@ set -uo pipefail
 root=$(git rev-parse --show-toplevel) || exit 2
 cd "$root" || exit 2
 
-T=$root/plugins/delivery-dev/skills/delivery-dev/templates
+T=$root/plugins/cf-dev/skills/cf-dev/templates
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 fail=0

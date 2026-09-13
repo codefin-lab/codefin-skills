@@ -1,4 +1,4 @@
-# delivery-skills
+# cf-skills
 
 Skills for Claude Code, Codex, Antigravity, Cursor and around eighty other agents: one role
 each, covering how software gets decided,
@@ -53,36 +53,36 @@ spot. Where it says nothing, it applies either way.
 
 One per role. Each owns a question, and - just as important - each says what it does **not**
 own, because most project arguments are somebody answering a question that was not theirs. The
-roles are defined once, in `delivery-dev` under `references/workflow.md`.
+roles are defined once, in `cf-dev` under `references/workflow.md`.
 
 | Role | Owns | Does not own |
 | :-- | :-- | :-- |
-| `delivery-po` | goal and value, scope, priority, MVP, backlog order, accepting the outcome | technical design, the schedule |
-| `delivery-ba` | requirement analysis, rules, use cases, edge cases, functional and non-functional requirements, acceptance criteria | priority, architecture |
-| `delivery-sa` | architecture, component, API and data design, how an NFR is met, integration, security, trade-offs | business priority |
-| `delivery-dev` | implementation, unit tests, technical breakdown and the detailed estimate | product priority |
-| `delivery-qa` | test strategy and cases, traceability, verification, regression | product scope decisions |
-| `delivery-pm` | plan, milestones, dependencies, resources, coordinating estimates, risk, progress | product requirements, architecture |
+| `cf-po` | goal and value, scope, priority, MVP, backlog order, accepting the outcome | technical design, the schedule |
+| `cf-ba` | requirement analysis, rules, use cases, edge cases, functional and non-functional requirements, acceptance criteria | priority, architecture |
+| `cf-sa` | architecture, component, API and data design, how an NFR is met, integration, security, trade-offs | business priority |
+| `cf-dev` | implementation, unit tests, technical breakdown and the detailed estimate | product priority |
+| `cf-qa` | test strategy and cases, traceability, verification, regression | product scope decisions |
+| `cf-pm` | plan, milestones, dependencies, resources, coordinating estimates, risk, progress | product requirements, architecture |
 
 One person often wears several hats. That is a staffing arrangement, not a merging of the jobs -
 write down who is wearing which, because the failure mode is everyone assuming somebody else was.
 
-`delivery-setup` is the odd one out: it runs once at the start of a repository and then never
+`cf-setup` is the odd one out: it runs once at the start of a repository and then never
 again.
 
 The sections below follow the order work moves through them.
 
 ```
-delivery-ba        what we agreed to build
+cf-ba        what we agreed to build
    │  US-3.4 and its acceptance criteria
    ▼
-delivery-qa        how it gets proved
+cf-qa        how it gets proved
    │  TS-900 citing US-3.4
    ▼
-delivery-dev       how it gets built and repaired
+cf-dev       how it gets built and repaired
       code, tests and defects, each naming the promise it is about
 
-delivery-pm        when, at what cost, and what gets cut
+cf-pm        when, at what cost, and what gets cut
       the arithmetic on all three, reported to whoever is paying
 ```
 
@@ -92,7 +92,7 @@ everything else is in service of it.
 
 ---
 
-### `delivery-po` — is it worth doing, and in what order
+### `cf-po` — is it worth doing, and in what order
 
 Fires when you are setting or challenging a goal, drawing the scope boundary, choosing a
 minimum, ordering a backlog, or accepting a delivered outcome.
@@ -109,7 +109,7 @@ the order, and in what is left out.
 
 ---
 
-### `delivery-ba` — what we agreed to build
+### `cf-ba` — what we agreed to build
 
 Fires when you are eliciting requirements, writing or amending a BRD, writing acceptance
 criteria, drawing the scope line, sizing a feature list, or judging whether a customer's
@@ -128,12 +128,12 @@ changes, never after.
 | `sizing.md` | feature lists, estimating without fooling yourself, why man-days stay internal |
 | `modelling.md` | what deserves a diagram, and the access matrix everyone forgets |
 
-Ships `/delivery-ba:requirements`, `check-requirements.sh`, and templates for a requirement, a
+Ships `/cf-ba:requirements`, `check-requirements.sh`, and templates for a requirement, a
 question set and a change request.
 
 ---
 
-### `delivery-sa` — what it is built out of, and what was traded
+### `cf-sa` — what it is built out of, and what was traded
 
 Fires when you are choosing a shape, designing an API, schema or data model, working out how a
 non-functional requirement will actually be met, integrating with a system you do not control,
@@ -154,7 +154,7 @@ Ships `adr-template.md` and `nfr-table.md`.
 
 ---
 
-### `delivery-dev` — how it gets built and repaired
+### `cf-dev` — how it gets built and repaired
 
 Fires when you are writing, reviewing or releasing code, investigating a defect, or deciding
 commit messages, branch names, repository layout or review gates.
@@ -175,12 +175,12 @@ answer of its own.
 | `conventions.md` | house defaults for a greenfield project |
 | `stacks.md` | the only file that names specific tools |
 
-Ships `/delivery-dev:defect`, `blast-radius.sh`, and templates for tests in three languages, CI
+Ships `/cf-dev:defect`, `blast-radius.sh`, and templates for tests in three languages, CI
 workflows, an ADR, a defect record and the handoff checklists.
 
 ---
 
-### `delivery-qa` — whether it has been proved
+### `cf-qa` — whether it has been proved
 
 Fires when you are designing scenarios from acceptance criteria, maintaining the register,
 writing automation, planning or running a round, exploring, or taking a customer through UAT.
@@ -197,12 +197,12 @@ QA decides one question, and it is not whether the system is good: **has the cla
 | `uat.md` | UAT as a rehearsal, not a discovery |
 | `reporting-defects.md` | writing a defect that does not bounce |
 
-Ships `/delivery-qa:round`, `trace-gaps.sh`, and templates for a round report, an exploratory
+Ships `/cf-qa:round`, `trace-gaps.sh`, and templates for a round report, an exploratory
 charter, a UAT walkthrough and a testability-gap list.
 
 ---
 
-### `delivery-pm` — when, at what cost, and what gets cut
+### `cf-pm` — when, at what cost, and what gets cut
 
 Fires when you are planning or replanning, tracking spend against the estimate, forecasting a
 finish, keeping the risk register live, preparing a steering report, or deciding whether to ship.
@@ -219,12 +219,12 @@ likely rather than at the deadline.
 | `risk.md` | entries with a consequence in days and an owner who is a person, and what actually goes wrong on client projects |
 | `steering.md` | where each number comes from, saying the bad thing first, asking for decisions rather than narrating |
 
-Ships `/delivery-pm:steering`, `forecast.sh`, and templates for a steering report and a risk
+Ships `/cf-pm:steering`, `forecast.sh`, and templates for a steering report and a risk
 register.
 
 ---
 
-### `delivery-setup` — getting a repository ready
+### `cf-setup` — getting a repository ready
 
 Run once per repository, by hand. It creates the furniture that is missing — `CONTEXT.md`, a
 first ADR, `.env.example`, the four test targets and a pull request gate — and records the few
@@ -284,16 +284,16 @@ name - you describe the task.
 | "how are we doing against the plan" | the forecast is recomputed from what happened, and it will not be flattered |
 | "the customer says the export is wrong" | it is classified as a defect or a CR against the document before anyone starts fixing |
 
-`delivery-setup` is the exception: it never fires on its own, because a repository is set up
+`cf-setup` is the exception: it never fires on its own, because a repository is set up
 deliberately or not at all. Ask for it by name the first time you bring these skills to a project.
 
 The slash commands are for when you want the whole procedure driven end to end:
 
 ```
-/delivery-ba:requirements  docs/BRD.docx
-/delivery-qa:round         round 3, build 1.4.2
-/delivery-dev:defect       customer reports the balance rounds down on the statement
-/delivery-pm:steering      march report, features.xlsx
+/cf-ba:requirements  docs/BRD.docx
+/cf-qa:round         round 3, build 1.4.2
+/cf-dev:defect       customer reports the balance rounds down on the statement
+/cf-pm:steering      march report, features.xlsx
 ```
 
 **[docs/examples.md](docs/examples.md) walks one project through every role** - the same
@@ -303,7 +303,7 @@ it than read about it.
 
 ### A worked pass through the chain
 
-0. **Once per repository**, `delivery-setup` creates what is missing and asks only about what the
+0. **Once per repository**, `cf-setup` creates what is missing and asks only about what the
    files could not have told it.
 1. **The PO** decides it is worth doing and where it sits in the order, and writes down what is
    deliberately out.
@@ -335,16 +335,16 @@ Two routes. They read the same files, so a skill is written once.
 
 ```bash
 claude plugin marketplace add codefin-lab/codefin-skills
-claude plugin install delivery-ba@delivery-skills
-claude plugin install delivery-dev@delivery-skills
-claude plugin install delivery-qa@delivery-skills
-claude plugin install delivery-pm@delivery-skills
-claude plugin install delivery-po@delivery-skills
-claude plugin install delivery-sa@delivery-skills
+claude plugin install cf-ba@cf-skills
+claude plugin install cf-dev@cf-skills
+claude plugin install cf-qa@cf-skills
+claude plugin install cf-pm@cf-skills
+claude plugin install cf-po@cf-skills
+claude plugin install cf-sa@cf-skills
 ```
 
 Claude Code only. Brings the skills **and** the slash commands, and updates with
-`claude plugin marketplace update delivery-skills`.
+`claude plugin marketplace update cf-skills`.
 
 ### With `npx skills` — the skills on their own, any agent
 
@@ -376,7 +376,7 @@ References, scripts and templates all come along, and scripts stay executable.
 the commands do not exist, and each procedure is followed from its reference file instead. Same
 steps, one fewer shortcut - no command is ever the only route to a procedure.
 
-`delivery-setup` stays user-invoked on every agent: it carries both Claude Code's
+`cf-setup` stays user-invoked on every agent: it carries both Claude Code's
 `disable-model-invocation` and Codex's `allow_implicit_invocation: false`, so nothing fires it on
 its own. A repository is set up deliberately or not at all.
 
@@ -385,8 +385,8 @@ its own. A repository is set up deliberately or not at all.
 Point either route at a checkout:
 
 ```bash
-claude plugin marketplace add ./delivery-skills
-npx skills add ./delivery-skills --skill delivery-dev --copy
+claude plugin marketplace add ./cf-skills
+npx skills add ./cf-skills --skill cf-dev --copy
 ```
 
 ### Optional dependencies

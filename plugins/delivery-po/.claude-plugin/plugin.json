@@ -1,9 +1,0 @@
-{
-  "name": "delivery-po",
-  "version": "0.1.0",
-  "description": "House style for owning a product or a scope: the goal and the value behind it, what is in and out, what order it gets built in, what the minimum is, and whether the result is accepted.",
-  "author": { "name": "Codefin Company Limited", "url": "https://github.com/codefin-lab" },
-  "repository": "https://github.com/codefin-lab/codefin-skills",
-  "license": "MIT",
-  "keywords": ["product-owner", "scope", "priority", "mvp", "backlog", "acceptance"]
-}

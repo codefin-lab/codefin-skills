@@ -44,7 +44,7 @@ Put the shape of the thing in the main files, and every tool name in one referen
 A team may write Go, Rust, TypeScript, Python, Dart, Kotlin, Swift and Terraform; a skill that
 assumes one of them excludes most of the company, and dates the moment a stack changes.
 
-`delivery-dev` does this with `references/stacks.md`, and checks it:
+`cf-dev` does this with `references/stacks.md`, and checks it:
 
 ```bash
 grep -ril '<a tool your company happens to use>' plugins/<skill>/skills/<skill>/SKILL.md \
@@ -65,7 +65,7 @@ anything you write as absolute really is.
 Templates and scripts ship only after they have been executed against something real, and the
 result goes in the commit message. `./scripts/check-templates.sh` enforces this for unit-test
 templates by copying each one over a fixture in `tests/fixtures/` and running it; add a fixture
-when you add a template, so the rule keeps applying to the new one. `delivery-dev`'s Go and Python test templates were run in real
+when you add a template, so the rule keeps applying to the new one. `cf-dev`'s Go and Python test templates were run in real
 modules through the template's own Makefile target; its `blast-radius.sh` was run against the
 live repositories, where it immediately found a vendored copy of a shared helper and a component
 defined three times.
@@ -96,7 +96,7 @@ fires. **Cognitive load** is what it costs the human: remembering the skill exis
 
 Choose model-invoked only when the agent must reach it without being told - which is true of a
 discipline that should apply whenever the work matches, and false of anything that runs once by
-hand. `delivery-setup` is user-invoked for exactly that reason: paying context load in every
+hand. `cf-setup` is user-invoked for exactly that reason: paying context load in every
 future session for a skill used once is waste.
 
 A user-invoked skill's description is written for the person reading a list, not for the model:
@@ -156,17 +156,17 @@ only sometimes relevant goes in `references/` and gets pointed at from the table
 
 1. Bump `version` in `plugin.json`.
 2. Commit. Match this repository's log: Conventional Commits, and no AI attribution trailer —
-   the same rule `delivery-dev` tells you to apply everywhere.
+   the same rule `cf-dev` tells you to apply everywhere.
 3. Test **both** install routes locally before pushing, because they package differently:
 
    ```bash
-   claude plugin marketplace update delivery-skills
-   claude plugin install <skill>@delivery-skills
+   claude plugin marketplace update cf-skills
+   claude plugin install <skill>@cf-skills
 
-   npx skills add ./delivery-skills --skill <skill> --copy
+   npx skills add ./cf-skills --skill <skill> --copy
    ```
 
-   Then look at what actually landed — under `~/.claude/plugins/cache/delivery-skills/` for the
+   Then look at what actually landed — under `~/.claude/plugins/cache/cf-skills/` for the
    plugin, and `.claude/skills/<skill>/` for the other. A file missing from the package is
    invisible from the source tree, and an executable that lost its bit is worse than missing.
 4. **Write the skill so it works without its commands.** `npx skills` installs skills but not
@@ -179,5 +179,5 @@ only sometimes relevant goes in `references/` and gets pointed at from the table
 The invocation choice, the two loads, the description as a pointer, and completion criteria are
 taken from Matt Pocock's [skills repository](https://github.com/mattpocock/skills) - see its
 `writing-for-agents` skill and that skill's `SKILL-MECHANICS.md`. The explore-then-ask-only-the
--unsettled shape of `delivery-setup` comes from the same place. Worth reading in full before
+-unsettled shape of `cf-setup` comes from the same place. Worth reading in full before
 writing a skill here.

@@ -1,0 +1,9 @@
+{
+  "name": "cf-sa",
+  "version": "0.1.0",
+  "description": "House style for solution architecture: the shape a system is built in, its component, API and data design, how non-functional requirements are actually met, integration, security, and the trade-offs behind each.",
+  "author": { "name": "Codefin Company Limited", "url": "https://github.com/codefin-lab" },
+  "repository": "https://github.com/codefin-lab/codefin-skills",
+  "license": "MIT",
+  "keywords": ["architecture", "api-design", "data-design", "nfr", "integration", "security", "adr"]
+}
