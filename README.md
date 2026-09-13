@@ -1,6 +1,7 @@
 # delivery-skills
 
-Skills for Claude Code and other agents: one role each, covering how software gets decided,
+Skills for Claude Code, Codex, Antigravity, Cursor and around eighty other agents: one role
+each, covering how software gets decided,
 specified, designed, built, proved and managed - plus one that gets a repository ready for them.
 
 They describe **one opinionated process**, written so that anyone can run it. The opinions are
@@ -328,7 +329,7 @@ Two routes. They read the same files, so a skill is written once.
 ### As a plugin — the full thing
 
 ```bash
-claude plugin marketplace add codefin-lab/delivery-skills
+claude plugin marketplace add codefin-lab/codefin-skills
 claude plugin install delivery-ba@delivery-skills
 claude plugin install delivery-dev@delivery-skills
 claude plugin install delivery-qa@delivery-skills
@@ -340,19 +341,39 @@ claude plugin install delivery-sa@delivery-skills
 Claude Code only. Brings the skills **and** the slash commands, and updates with
 `claude plugin marketplace update delivery-skills`.
 
-### With `npx skills` — the skills on their own
+### With `npx skills` — the skills on their own, any agent
 
 ```bash
-npx skills add codefin-lab/delivery-skills --skill '*'
+npx skills add codefin-lab/codefin-skills --skill '*'
 ```
 
-Works for other agents too, and installs into the project at `.claude/skills/<name>/` (add `-g`
-for the user directory), recording what it took in `skills-lock.json`.
+It detects the agent you are running and installs where that agent reads, recording what it took
+in `skills-lock.json`. Name one explicitly with `-a`, and add `-g` to install for the user rather
+than the project:
+
+```bash
+npx skills add codefin-lab/codefin-skills --skill '*' -a codex
+npx skills add codefin-lab/codefin-skills --skill '*' -a antigravity-cli
+```
+
+| Agent | Project | User |
+| :-- | :-- | :-- |
+| Codex | `.agents/skills/` | `~/.codex/skills/` |
+| Antigravity CLI | `.agents/skills/` | `~/.gemini/antigravity-cli/skills/` |
+| Cursor | `.agents/skills/` | `~/.cursor/skills/` |
+| Claude Code | `.claude/skills/` | `~/.claude/skills/` |
+
+Around eighty agents are supported; those four are the ones verified here. Each skill carries an
+`agents/openai.yaml`, which Codex and agents following its spec use for the display name.
 
 References, scripts and templates all come along, and scripts stay executable.
-**Slash commands do not**, because they are a plugin mechanism: installed this way the commands
-do not exist, and each procedure is followed from its reference file instead. Same steps, one
-fewer shortcut - no command is ever the only route to a procedure.
+**Slash commands do not**, because they are a Claude Code plugin mechanism: installed this way
+the commands do not exist, and each procedure is followed from its reference file instead. Same
+steps, one fewer shortcut - no command is ever the only route to a procedure.
+
+`delivery-setup` stays user-invoked on every agent: it carries both Claude Code's
+`disable-model-invocation` and Codex's `allow_implicit_invocation: false`, so nothing fires it on
+its own. A repository is set up deliberately or not at all.
 
 ### Working on the skills
 
