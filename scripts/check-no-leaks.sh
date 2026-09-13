@@ -44,9 +44,9 @@ rules() {
     '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(io|com|co\.th|net)' \
     ''
   printf '%s\t%s\t%s\n' \
-    "ticket key that is not a documented placeholder" \
+    "ticket key that is not a known placeholder" \
     '\b[A-Z]{2,6}-[0-9]{2,6}\b' \
-    'ABC-123|DEF-118|TS-9[0-9][0-9]|WCAG-|UTF-|RFC-|ISO-|SHA-|AES-|CIS-|MIT-'
+    "$(allowlist)"
   printf '%s\t%s\t%s\n' \
     "private network address or cloud account id" \
     '\b(10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]{1,3}\.[0-9]{1,3}|[0-9]{12}\.dkr\.ecr\.)' \
@@ -55,6 +55,18 @@ rules() {
     "internal hostname" \
     '[a-z0-9-]+\.(internal|local|intranet|corp)\b' \
     ''
+}
+
+# Identifier prefixes that are known-safe here: the documented placeholders, plus anything a
+# fork adds. A fork tracking real work in this repository will have its own ticket keys, and
+# they are not leaks - $LEAK_ALLOW or a .leakallow file (one extended regex per line) says so.
+allowlist() {
+  local base='ABC-123|DEF-118|TS-9[0-9][0-9]|WCAG-|UTF-|RFC-|ISO-|SHA-|AES-|CIS-|MIT-'
+  local extra=""
+  [ -n "${LEAK_ALLOW:-}" ] && extra=$(printf '%s' "$LEAK_ALLOW" | tr '\n' '|')
+  [ -z "$extra" ] && [ -f .leakallow ] && extra=$(grep -vE '^\s*(#|$)' .leakallow | tr '\n' '|')
+  extra=${extra%|}
+  [ -n "$extra" ] && printf '%s|%s' "$base" "$extra" || printf '%s' "$base"
 }
 
 denylist() {
@@ -137,7 +149,13 @@ echo
 if [ "$fail" -eq 0 ]; then
   echo "clean"
 else
-  echo "FAILED - this repository is public. Remove the findings above before pushing."
+  echo "FAILED."
+  echo
+  echo "These checks exist because this repository is published and was written from internal"
+  echo "material, so the way it fails is someone pasting a real example into an edit."
+  echo
+  echo "If a finding is genuinely yours and safe - your own ticket keys in a fork, for instance -"
+  echo "add its prefix to .leakallow (gitignored) or \$LEAK_ALLOW rather than deleting the check."
   [ "$mode" = history ] && echo "A finding in history is not fixed by deleting the file; rewrite history."
 fi
 exit "$fail"

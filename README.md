@@ -9,6 +9,24 @@ useful.
 
 Codefin's document and brand house style is a separate, private package.
 
+## If you are not at Codefin
+
+Take them anyway - but know which parts are ours rather than universal, because the skills say so
+out loud rather than pretending otherwise:
+
+- **the BA is also the product owner**, so one person holds both what was agreed and what it is
+  worth. Where those are two people at your place, the handoffs gain a seam.
+- **QA writes the automation**, rather than specifying cases for developers to automate.
+- **the BRD (or FSD - clients use both names for one document) is the agreement**, and everything
+  carries its requirement identifier.
+
+Substitute your own arrangement where these differ; nothing else in the skills depends on them.
+Everything about repositories, tests, defects and gates applies as written.
+
+The checks in `scripts/` are for this repository's own safety. If you fork and they flag
+something of yours - your real ticket keys, say - add the prefix to `.leakallow` rather than
+removing the check.
+
 ## What these are for
 
 An agent that is good in general is still guessing about your team. It does not know that your
@@ -288,7 +306,9 @@ This repository runs the gate it argues for. Everything CI runs, you can run:
 
 The leak check works in two layers, because a list of confidential names cannot itself be
 published: structural patterns live in the script, and the names come from a `LEAK_DENYLIST`
-repository secret, or a gitignored `.leakpatterns` file locally. A denylist hit is reported by
+repository secret, or a gitignored `.leakpatterns` file locally. What is known-safe goes the
+other way, in `$LEAK_ALLOW` or a gitignored `.leakallow` — that is where a fork puts its own
+ticket prefixes. A denylist hit is reported by
 file, never by quoting the line. Every rule is tested by planting a fake leak and confirming the
 gate fails, with a control that ordinary prose does not trip it.
 
