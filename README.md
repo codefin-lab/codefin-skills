@@ -7,9 +7,21 @@ They describe **one opinionated process**, written so that anyone can run it. Th
 real and load-bearing - they came from delivering software to customers, not from a textbook -
 but nothing in them is tied to the company that wrote them. Take what is useful.
 
+## What these are for
+
+An agent that is good in general is still guessing about your team. It does not know that your
+repositories disagree with each other on purpose, that a change request and a defect are
+different things with different consequences, or that "the report loads quickly" is not a
+requirement. Every session it guesses again, and differently.
+
+These skills answer those questions once. Installed, they change what an agent does without
+being asked: it reads a repository's conventions before writing in it, runs the tests before
+reporting a fix, checks what else depends on the code it is about to change, and refuses to
+call an acceptance criterion finished when nobody could check it.
+
 ## What the process assumes
 
-Three assumptions are stated out loud in the skills rather than hidden, because your team may be
+Some assumptions are stated out loud in the skills rather than hidden, because your team may be
 arranged differently:
 
 - **QA writes the automation**, rather than specifying cases for developers to automate.
@@ -24,18 +36,6 @@ about repositories, tests, defects and gates applies as written.
 The checks in `scripts/` guard this repository, not yours. If you fork and one flags something of
 your own - your real ticket keys, say - add the prefix to `.leakallow` rather than removing the
 check.
-
-## What these are for
-
-An agent that is good in general is still guessing about your team. It does not know that your
-repositories disagree with each other on purpose, that a change request and a defect are
-different things with different consequences, or that "the report loads quickly" is not a
-requirement. Every session it guesses again, and differently.
-
-These skills answer those questions once. Installed, they change what an agent does without
-being asked: it reads a repository's conventions before writing in it, runs the tests before
-reporting a fix, checks what else depends on the code it is about to change, and refuses to
-call an acceptance criterion finished when nobody could check it.
 
 ## Two modes
 
@@ -69,7 +69,7 @@ write down who is wearing which, because the failure mode is everyone assuming s
 `delivery-setup` is the odd one out: it runs once at the start of a repository and then never
 again.
 
-Three of them hand off through the same two identifiers.
+The sections below follow the order work moves through them.
 
 ```
 delivery-ba        what we agreed to build
@@ -132,28 +132,6 @@ question set and a change request.
 
 ---
 
-### `delivery-qa` — whether it has been proved
-
-Fires when you are designing scenarios from acceptance criteria, maintaining the register,
-writing automation, planning or running a round, exploring, or taking a customer through UAT.
-
-QA decides one question, and it is not whether the system is good: **has the claim been proved?**
-
-| Reference | Covers |
-| :-- | :-- |
-| `designing-tests.md` | equivalence classes, boundaries, decision tables, illegal state transitions, the role matrix |
-| `test-register.md` | the register is the source and automation is derived from it, columns that earn their place |
-| `automation.md` | what to automate and what not, naming, structure, testability as a finding |
-| `rounds.md` | entry criteria, selecting by risk, the numbers a round reports, exit criteria |
-| `exploratory.md` | charters, time-boxes, and converting findings so they compound |
-| `uat.md` | UAT as a rehearsal, not a discovery |
-| `reporting-defects.md` | writing a defect that does not bounce |
-
-Ships `/delivery-qa:round`, `trace-gaps.sh`, and templates for a round report, an exploratory
-charter, a UAT walkthrough and a testability-gap list.
-
----
-
 ### `delivery-sa` — what it is built out of, and what was traded
 
 Fires when you are choosing a shape, designing an API, schema or data model, working out how a
@@ -198,6 +176,28 @@ answer of its own.
 
 Ships `/delivery-dev:defect`, `blast-radius.sh`, and templates for tests in three languages, CI
 workflows, an ADR, a defect record and the handoff checklists.
+
+---
+
+### `delivery-qa` — whether it has been proved
+
+Fires when you are designing scenarios from acceptance criteria, maintaining the register,
+writing automation, planning or running a round, exploring, or taking a customer through UAT.
+
+QA decides one question, and it is not whether the system is good: **has the claim been proved?**
+
+| Reference | Covers |
+| :-- | :-- |
+| `designing-tests.md` | equivalence classes, boundaries, decision tables, illegal state transitions, the role matrix |
+| `test-register.md` | the register is the source and automation is derived from it, columns that earn their place |
+| `automation.md` | what to automate and what not, naming, structure, testability as a finding |
+| `rounds.md` | entry criteria, selecting by risk, the numbers a round reports, exit criteria |
+| `exploratory.md` | charters, time-boxes, and converting findings so they compound |
+| `uat.md` | UAT as a rehearsal, not a discovery |
+| `reporting-defects.md` | writing a defect that does not bounce |
+
+Ships `/delivery-qa:round`, `trace-gaps.sh`, and templates for a round report, an exploratory
+charter, a UAT walkthrough and a testability-gap list.
 
 ---
 
@@ -274,10 +274,13 @@ name - you describe the task.
 
 | You say | What happens |
 | :-- | :-- |
+| "everything on this list is a Must" | the question that costs something: if only three land this quarter, which three |
 | "this acceptance criterion says the report loads quickly" | it is sent back as untestable, with the question it was hiding |
-| "fix this bug: the portfolio page errors for accounts with no holdings" | the defect procedure runs - record, reproduce, cause, blast radius, fix, regression test, gates, evidence |
+| "the requirement says highly available" | that is a requirement, not a design - it becomes a mechanism, a cost, and a defined failure behaviour |
 | "add a field to the shared customer model" | what depends on it is traced before the edit, and the integration layer becomes required |
+| "fix this bug: the portfolio page errors for accounts with no holdings" | the defect procedure runs - record, reproduce, cause, blast radius, fix, regression test, gates, evidence |
 | "plan the next SIT round" | entry criteria checked, selection by risk, exclusions written down, report with the tally |
+| "how are we doing against the plan" | the forecast is recomputed from what happened, and it will not be flattered |
 | "the customer says the export is wrong" | it is classified as a defect or a CR against the document before anyone starts fixing |
 
 `delivery-setup` is the exception: it never fires on its own, because a repository is set up
@@ -296,16 +299,24 @@ The slash commands are for when you want the whole procedure driven end to end:
 
 0. **Once per repository**, `delivery-setup` creates what is missing and asks only about what the
    files could not have told it.
-1. **The BA** writes `US-3.4` with acceptance criteria, runs `check-requirements.sh` over the
-   copy the customer actually holds, and sends back anything nobody could check.
-2. **QA** derives `TS-900` from those criteria, expands it into cases at the boundaries and
+1. **The PO** decides it is worth doing and where it sits in the order, and writes down what is
+   deliberately out.
+2. **The BA** turns that into `US-3.4` with acceptance criteria and a rough size, runs
+   `check-requirements.sh` over the copy the customer actually holds, and sends back anything
+   nobody could check.
+3. **The SA** decides the shape, and turns "retained seven years" into a mechanism with a cost
+   and a stated failure behaviour. What closes off an option leaves an ADR.
+4. **Dev** breaks it down, estimates it properly, says so if that disagrees with the rough
+   number, and builds it. The tests run as gates without anyone asking.
+5. **QA** derives `TS-900` from the same criteria, expands it into cases at the boundaries and
    across the roles, and records what cannot be tested yet as items with owners.
-3. **Dev** builds it, and the tests run as gates without anyone asking. A change to anything
-   shared makes the integration layer mandatory, decided by what the blast radius turned up.
-4. **A defect arrives.** It is judged against the document first - defect or CR - then
+6. **The PM** recomputes the forecast from what happened, and reports the slip the week it
+   becomes likely rather than at the deadline.
+7. **A defect arrives.** It is judged against the document first - defect or CR - then
    reproduced, traced, fixed once at the cause, and left with a regression test named for it.
-5. **UAT** is a rehearsal: every walkthrough already passed on this build, and open defects are
-   disclosed before the customer finds them.
+8. **UAT** is a rehearsal: every walkthrough already passed on this build, and open defects are
+   disclosed before the customer finds them. QA says it is proved, the PO says it is accepted,
+   the PM says it ships - three decisions, three people.
 
 Nothing in that loop requires the other skills to be installed - each works alone - but they are
 built to fit.
