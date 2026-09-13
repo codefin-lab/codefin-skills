@@ -160,13 +160,13 @@ only sometimes relevant goes in `references/` and gets pointed at from the table
 3. Test **both** install routes locally before pushing, because they package differently:
 
    ```bash
-   claude plugin marketplace update cf-skills
-   claude plugin install <skill>@cf-skills
+   claude plugin marketplace update skills
+   claude plugin install <skill>@skills
 
-   npx skills add ./cf-skills --skill <skill> --copy
+   npx skills add ./skills --skill <skill> --copy
    ```
 
-   Then look at what actually landed — under `~/.claude/plugins/cache/cf-skills/` for the
+   Then look at what actually landed — under `~/.claude/plugins/cache/skills/` for the
    plugin, and `.claude/skills/<skill>/` for the other. A file missing from the package is
    invisible from the source tree, and an executable that lost its bit is worse than missing.
 4. **Write the skill so it works without its commands.** `npx skills` installs skills but not

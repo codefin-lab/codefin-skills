@@ -1,4 +1,4 @@
-# cf-skills
+# skills
 
 Skills for Claude Code, Codex, Antigravity, Cursor and around eighty other agents: one role
 each, covering how software gets decided,
@@ -335,22 +335,22 @@ Two routes. They read the same files, so a skill is written once.
 ### As a plugin — the full thing
 
 ```bash
-claude plugin marketplace add codefin-lab/codefin-skills
-claude plugin install cf-ba@cf-skills
-claude plugin install cf-dev@cf-skills
-claude plugin install cf-qa@cf-skills
-claude plugin install cf-pm@cf-skills
-claude plugin install cf-po@cf-skills
-claude plugin install cf-sa@cf-skills
+claude plugin marketplace add codefin-lab/skills
+claude plugin install cf-ba@skills
+claude plugin install cf-dev@skills
+claude plugin install cf-qa@skills
+claude plugin install cf-pm@skills
+claude plugin install cf-po@skills
+claude plugin install cf-sa@skills
 ```
 
 Claude Code only. Brings the skills **and** the slash commands, and updates with
-`claude plugin marketplace update cf-skills`.
+`claude plugin marketplace update skills`.
 
 ### With `npx skills` — the skills on their own, any agent
 
 ```bash
-npx skills add codefin-lab/codefin-skills --skill '*'
+npx skills add codefin-lab/skills --skill '*'
 ```
 
 It detects the agent you are running and installs where that agent reads, recording what it took
@@ -358,8 +358,8 @@ in `skills-lock.json`. Name one explicitly with `-a`, and add `-g` to install fo
 than the project:
 
 ```bash
-npx skills add codefin-lab/codefin-skills --skill '*' -a codex
-npx skills add codefin-lab/codefin-skills --skill '*' -a antigravity-cli
+npx skills add codefin-lab/skills --skill '*' -a codex
+npx skills add codefin-lab/skills --skill '*' -a antigravity-cli
 ```
 
 | Agent | Project | User |
@@ -386,8 +386,8 @@ its own. A repository is set up deliberately or not at all.
 Point either route at a checkout:
 
 ```bash
-claude plugin marketplace add ./cf-skills
-npx skills add ./cf-skills --skill cf-dev --copy
+claude plugin marketplace add ./skills
+npx skills add ./skills --skill cf-dev --copy
 ```
 
 ### Optional dependencies
