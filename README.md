@@ -72,23 +72,55 @@ again.
 
 The sections below follow the order work moves through them.
 
-```
-cf-ba        what we agreed to build
-   │  US-3.4 and its acceptance criteria
-   ▼
-cf-qa        how it gets proved
-   │  TS-900 citing US-3.4
-   ▼
-cf-dev       how it gets built and repaired
-      code, tests and defects, each naming the promise it is about
+```mermaid
+flowchart TD
+    PO["PO<br/>worth doing, in what order"]
+    BA["BA<br/>what exactly, and how to check it"]
+    SA["SA<br/>what it is built out of"]
+    DEV["Dev<br/>build it, and repair it"]
+    QA["QA<br/>has it been proved"]
+    PM["PM<br/>when, at what cost, what gets cut"]
 
-cf-pm        when, at what cost, and what gets cut
-      the arithmetic on all three, reported to whoever is paying
+    PO -->|scope and order| BA
+    BA -->|US-3.4 and its acceptance criteria| SA
+    SA -->|the shape, ADRs, how each NFR is met| DEV
+    DEV -->|a build on an environment| QA
+    QA -->|defects, each citing the US it violates| DEV
+    QA -->|proved, or not| PO
+
+    BA -.->|the same criteria| QA
+    BA -.->|rough size| PM
+    DEV -.->|detailed estimate| PM
+    QA -.->|round numbers| PM
+    PM -.->|forecast, and what gets cut| PO
+```
+
+Solid lines are the work moving. Dotted ones are what the PM needs in order to say when and at
+what cost - the role reads from everyone and decides for nobody.
+
+## What travels between them
+
+Two identifiers, and they carry each other. The BA numbers what was agreed; QA numbers how it
+gets proved.
+
+```mermaid
+flowchart LR
+    US["US-3.4<br/>the agreement, and its acceptance criteria"]
+    TS["TS-901<br/>the scenario QA derives to prove it"]
+    C["test cases<br/>named for TS-901, citing US-3.4"]
+    D["DEF-902<br/>cites the US it violates"]
+    R["regression test<br/>named for both"]
+
+    US --> TS --> C
+    US --> D --> R
 ```
 
 A failing test names the clause of the agreement that is now untrue. A customer's complaint can
-be traced to the case that should have caught it. That is the whole point of the chain, and
-everything else is in service of it.
+be traced to the case that should have caught it. A requirement with no scenario has nobody
+proving it, and a scenario citing no requirement is testing something nobody asked for - both of
+which `trace-gaps.sh` will tell you.
+
+That is the whole point of the chain, and everything else is in service of it.
 
 ---
 
